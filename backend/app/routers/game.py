@@ -39,7 +39,7 @@ async def get_game_results(id: int):
     response_model=FolderInfo,
     description="Retrieves information about root folder in repository used in game with given id.",
 )
-async def get_root_folder_content(id: int):
+async def get_root_folder_info(id: int):
     pass
 
 
@@ -48,7 +48,7 @@ async def get_root_folder_content(id: int):
     response_model=FolderInfo,
     description="Retrieves information about tree_id folder in repository used in game with given game_id.",
 )
-async def get_folder_content(game_id: int, tree_id: str):
+async def get_folder_info(game_id: int, tree_id: str):
     pass
 
 
