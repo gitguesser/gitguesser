@@ -4,20 +4,21 @@ from typing import List
 from pydantic import BaseModel
 
 
-class RepoId(BaseModel):
-    name: str
-    owner: str
+class GameStartConfig(BaseModel):
+    player_name: str
+    repo_name: str
+    repo_owner: str
 
 
-class GameId(BaseModel):
-    id: int
-
-
-class GameResults(BaseModel):
+class GameInfo(BaseModel):
     game_id: int
+    player_name: str
     repo_name: str
     repo_owner: str
     start_time: datetime
+
+
+class GameResults(GameInfo):
     end_time: datetime
     score: int
     player_answer: str
@@ -27,7 +28,7 @@ class GameResults(BaseModel):
         orm_mode = True
 
 
-class FolderContent(BaseModel):
+class FolderInfo(BaseModel):
     tree_id: str
     name: str
     content: List[str]
