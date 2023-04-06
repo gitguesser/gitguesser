@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_USER: gitguesser
       POSTGRES_PASSWORD: gitguesser
-      POSTGRESS_DB: gitguesser_db
+      POSTGRES_DB: gitguesser_db
     expose:
       - 5432
 
