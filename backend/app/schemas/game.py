@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import List
 
 from pydantic import BaseModel
 
@@ -17,6 +16,9 @@ class GameInfo(BaseModel):
     repo_owner: str
     start_time: datetime
 
+    class Config:
+        orm_mode = True
+
 
 class GameResults(GameInfo):
     end_time: datetime
@@ -26,12 +28,6 @@ class GameResults(GameInfo):
 
     class Config:
         orm_mode = True
-
-
-class FolderInfo(BaseModel):
-    tree_id: str
-    name: str
-    content: List[str]
 
 
 class PlayerAnswer(BaseModel):
