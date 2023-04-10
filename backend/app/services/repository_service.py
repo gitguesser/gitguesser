@@ -12,12 +12,12 @@ async def update_repo(*, db: AsyncSession, owner: str, repo: str) -> Repository:
     """
 
 
-async def get_repo(*, db: AsyncSession, repo_id: str) -> Repository:
+async def get_repo(*, db: AsyncSession, repo_id: int) -> Repository:
     """Returns repository with given id or raises a 404 HTTPException if it does not exist."""
 
 
 async def get_directory(
-    *, db: AsyncSession, repo_id: str, directory_id: str
+    *, db: AsyncSession, repo_id: int, directory_id: str
 ) -> Directory:
     """Returns the directory with given id that belongs to the repository.
 
@@ -26,14 +26,14 @@ async def get_directory(
     """
 
 
-async def get_root_directory(*, db: AsyncSession, repo_id: str) -> Directory:
+async def get_root_directory(*, db: AsyncSession, repo_id: int) -> Directory:
     """Returns the root directory of the repository with given id.
 
     Raises a 404 HTTPException if the repository does not exist.
     """
 
 
-async def get_random_file_path(*, db: AsyncSession, repo_id: str) -> str:
+async def get_random_file_path(*, db: AsyncSession, repo_id: int) -> str:
     """Returns path to a randomly selected file that belongs to the repository.
 
     Raises a 404 HTTPException if the repository does not exist.
