@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from schemas.game import GameInfo, GameResults
+from schemas.game import GameInfo, GameResults, GameStartConfig, PlayerAnswer
 
 router = APIRouter(
     prefix="/game",
