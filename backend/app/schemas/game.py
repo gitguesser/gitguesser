@@ -11,6 +11,7 @@ class GameStartConfig(BaseModel):
 
 class GameInfo(BaseModel):
     game_id: int
+    repo_id: int
     player_name: str
     repo_name: str
     repo_owner: str
