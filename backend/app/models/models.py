@@ -1,4 +1,4 @@
-from sqlalchemy import Column, DateTime, ForeignKey, Integer, String
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, UniqueConstraint
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
@@ -10,7 +10,7 @@ class Game(Base):
     __tablename__ = "games"
 
     id = Column(Integer, primary_key=True, index=True)
-    repo_id = Column(Integer, ForeignKey("repos.id"), nullable=False)
+    repository_id = Column(Integer, ForeignKey("repos.id"), nullable=False)
     start_time = Column(DateTime, nullable=False)
     end_time = Column(DateTime)
     player_name = Column(String, nullable=False)
@@ -21,11 +21,13 @@ class Game(Base):
     repo = relationship("Repo", back_populates="games")
 
 
-class Repo(Base):
+class Repository(Base):
     __tablename__ = "repos"
+    __table_args__ = (UniqueConstraint("name", "owner"),)
 
-    # TODO Add repo owner and repo name or link to repo.
     id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    owner = Column(String, nullable=False)
     ETag = Column(String, nullable=False)
     data = Column(JSONB, nullable=False)
 
