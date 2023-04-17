@@ -17,6 +17,6 @@ services:
     ports:
       - 8000:8000
     environment:
-      - DATABASE_URL=postgresql://gitguesser:gitguesser@db:5432/gitguesser_db
+      - DATABASE_URL=postgresql+asyncpg://gitguesser:gitguesser@db:5432/gitguesser_db
     depends_on:
       - db
