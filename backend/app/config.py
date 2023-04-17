@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     postgres_server: str
     postgres_port: int
     postgres_db: str
+    database_url: str
 
     class Config:
         case_sensitive = False
