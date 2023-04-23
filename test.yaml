@@ -19,7 +19,6 @@ jobs:
         ports:
           - 5432:5432
 
-
     steps:
       - uses: actions/checkout@v2
       - name: Build and run containers
