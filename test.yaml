@@ -1,10 +1,10 @@
-name: Testing
+name: Testing and Style Check
 
 on:
   push:
     branches:
       - main
-      
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -18,15 +18,21 @@ jobs:
           POSTGRES_DB: gitguesser_db
         ports:
           - 5432:5432
-
     steps:
       - uses: actions/checkout@v2
       - name: Build and run containers
         run: docker-compose -f compose.yaml up -d --build
-        volumes:
-          - ./backend:/backend
-          - ./backend/tests:/tests
       - name: Run tests
         run: docker-compose -f compose.yaml exec backend pytest
       - name: Stop containers
         run: docker-compose -f compose.yaml down
+
+
+  style-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: pip install  black flake8
+      - name: Check code style
+        run: black -l . && flake8 .
