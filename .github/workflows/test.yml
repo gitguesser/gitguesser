@@ -32,6 +32,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
-        run: pip install black flake8
+        run: |
+          pip install autoflake isort black flake8
       - name: Check code style
-        run: black -l 80 && flake8 .
+        run: |
+          autoflake --remove-all-unused-imports --recursive --remove-unused-variables --check backend
+          isort backend --profile black --check-only
+          black backend --check
+          flake8 backend
