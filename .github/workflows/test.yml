@@ -26,7 +26,6 @@ jobs:
       - name: Stop containers
         run: docker-compose -f compose.yaml down
 
-
   style-check:
     runs-on: ubuntu-latest
     steps:
