@@ -22,7 +22,7 @@ jobs:
       - name: Build and run containers
         run: docker-compose -f compose.yaml up -d --build
       - name: Run tests
-        run: docker-compose -f compose.yaml exec backend pytest
+        run: docker-compose -f compose.yaml exec --tty backend pytest
       - name: Stop containers
         run: docker-compose -f compose.yaml down
 
