@@ -34,4 +34,4 @@ jobs:
       - name: Install dependencies
         run: pip install black flake8
       - name: Check code style
-        run: black -l . && flake8 .
+        run: black -l 80 && flake8 .
