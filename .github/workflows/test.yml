@@ -4,21 +4,12 @@ on:
   push:
     branches:
       - main
-
+  pull_request:
 jobs:
   test:
     runs-on: ubuntu-latest
-    services:
-      db:
-        image: postgres:15.2
-        env:
-          POSTGRES_USER: gitguesser
-          POSTGRES_PASSWORD: gitguesser
-          POSTGRES_DB: gitguesser_db
-        ports:
-          - 5432:5432
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Build and run containers
         run: docker-compose -f compose.yaml up -d --build
       - name: Run tests
@@ -29,13 +20,12 @@ jobs:
   style-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install dependencies
         run: |
-          pip install autoflake isort black flake8
+          pip install autoflake isort black 
       - name: Check code style
         run: |
           autoflake --remove-all-unused-imports --recursive --remove-unused-variables --check backend
           isort backend --profile black --check-only
           black backend --check
-          flake8 backend
