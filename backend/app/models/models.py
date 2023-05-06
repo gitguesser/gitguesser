@@ -1,10 +1,9 @@
 import datetime
 
+from database import Base
 from sqlalchemy import Column, DateTime, ForeignKey, Index, Integer, String
 from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-from app.database import Base
 
 
 class Game(Base):
@@ -29,6 +28,7 @@ class Repository(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
     owner = Column(String, nullable=False)
+    branch = Column(String, nullable=False)
     etag = Column(String, nullable=False)
     data = Column(JSONB, nullable=False)
     creation_date = Column(DateTime, nullable=False, default=datetime.datetime.utcnow)

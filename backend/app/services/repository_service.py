@@ -1,14 +1,13 @@
-from fastapi import HTTPException, status
 import httpx
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import literal_column, select, func
-from sqlalchemy.dialects.postgresql import JSONB
-
+from fastapi import HTTPException, status
 from models.models import Repository
 from schemas.repository import Directory, DirectoryInfo
+from sqlalchemy import func, literal_column, select
+from sqlalchemy.dialects.postgresql import JSONB
+from sqlalchemy.ext.asyncio import AsyncSession
 
 
-async def update_repo(*, db: AsyncSession, owner: str, name: str) -> int:
+async def update_repo(*, db: AsyncSession, owner: str, name: str, branch: str) -> int:
     """Saves the repository in the database and returns its id.
 
     If the repository is already saved, then it checks if the newest one has
@@ -17,14 +16,18 @@ async def update_repo(*, db: AsyncSession, owner: str, name: str) -> int:
     """
     repo = await db.scalar(
         select(Repository)
-        .where((Repository.name == name) & (Repository.owner == owner))
+        .where(Repository.name == name)
+        .where(Repository.owner == owner)
+        .where(Repository.branch == branch)
         .order_by(Repository.creation_date.desc())
         .limit(1)
     )
 
     response = None
 
-    endpoint = f"https://api.github.com/repos/{owner}/{name}/git/trees/master?recursive=true"
+    endpoint = (
+        f"https://api.github.com/repos/{owner}/{name}/git/trees/{branch}?recursive=true"
+    )
     async with httpx.AsyncClient() as client:
         if repo is None:
             response = await client.get(endpoint)
@@ -33,10 +36,10 @@ async def update_repo(*, db: AsyncSession, owner: str, name: str) -> int:
 
     if response.status_code != status.HTTP_304_NOT_MODIFIED:
         repo = Repository(
-            name=name, 
-            owner=owner, 
-            etag=response.headers["etag"], 
-            data=_parse_response(response)
+            name=name,
+            owner=owner,
+            etag=response.headers["etag"],
+            data=_parse_response(response),
         )
         db.add(repo)
         await db.commit()
@@ -46,12 +49,10 @@ async def update_repo(*, db: AsyncSession, owner: str, name: str) -> int:
 
 async def get_repo(*, db: AsyncSession, repo_id: int) -> Repository:
     """Returns the repository with given id or raises a 404 HTTPException if it does not exist."""
-    repo = await db.scalar(
-        select(Repository)
-        .where(Repository.id == int(repo_id))
-    )
+    repo = await db.scalar(select(Repository).where(Repository.id == int(repo_id)))
     if repo is None:
         raise HTTPException(status_code=404, detail="Repository not found")
+
     return repo
 
 
@@ -85,15 +86,12 @@ async def get_directory(
     subdirectories = q.all()
 
     return Directory(
-        id=directory["sha"], 
-        name=directory["path"].split("/")[-1], 
+        id=directory["sha"],
+        name=directory["path"].split("/")[-1],
         subdirectories=[
-            DirectoryInfo(
-                id=subdir["sha"], 
-                name=subdir["path"].split("/")[-1]
-            ) 
+            DirectoryInfo(id=subdir["sha"], name=subdir["path"].split("/")[-1])
             for subdir in subdirectories
-        ]
+        ],
     )
 
 
