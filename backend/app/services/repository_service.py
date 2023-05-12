@@ -1,10 +1,12 @@
 import httpx
+import random
 from fastapi import HTTPException, status
-from models.models import Repository
-from schemas.repository import Directory, DirectoryInfo
+from ..models.models import Repository
+from ..schemas.repository import Directory, DirectoryInfo
 from sqlalchemy import func, literal_column, select
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import aliased
 
 
 async def update_repo(*, db: AsyncSession, owner: str, name: str, branch: str) -> int:
@@ -64,7 +66,7 @@ async def get_directory(
     Raises a 404 HTTPException if the repository does not exist or it
     does not contain this directory.
     """
-    repo = get_repo(db=db, repo_id=repo_id)
+    get_repo(db=db, repo_id=repo_id)
 
     val = literal_column("value", type_=JSONB)
 
@@ -100,6 +102,30 @@ async def get_root_directory(*, db: AsyncSession, repo_id: int) -> Directory:
 
     Raises a 404 HTTPException if the repository does not exist.
     """
+    get_repo(db=db, repo_id=repo_id)
+
+    val = literal_column("value", type_=JSONB)
+
+    subq = select(Repository).where(Repository.id == int(repo_id)).subquery()
+    repo_subq = aliased(Repository, subq)
+
+    q = await db.scalars(
+        select(val)
+        .select_from(repo_subq, func.jsonb_array_elements(repo_subq.data).alias())
+        .where(val.contains({"parent": "/"}))
+        .where(val.contains({"type": "tree"}))
+    )
+
+    subdirectories = q.all()
+
+    return Directory(
+        id="",
+        name="",
+        subdirectories=[
+            DirectoryInfo(id=subdir["sha"], name=subdir["path"].split("/")[-1])
+            for subdir in subdirectories
+        ],
+    )
 
 
 async def get_random_file_path(*, db: AsyncSession, repo_id: int) -> str:
@@ -108,6 +134,20 @@ async def get_random_file_path(*, db: AsyncSession, repo_id: int) -> str:
     Raises a 404 HTTPException if the repository does not exist.
     The returned path is in the format 'a/b/c/file.txt'.
     """
+    get_repo(db=db, repo_id=repo_id)
+
+    val = literal_column("value", type_=JSONB)
+
+    subq = select(Repository).where(Repository.id == int(repo_id)).subquery()
+    repo_subq = aliased(Repository, subq)
+
+    q = await db.scalars(
+        select(val)
+        .select_from(repo_subq, func.jsonb_array_elements(repo_subq.data).alias())
+        .where(val.contains({"type": "tree"}))
+    )
+
+    return random.choice(q.all())["path"]
 
 
 def _parse_response(response):
