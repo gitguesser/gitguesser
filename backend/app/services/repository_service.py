@@ -40,13 +40,14 @@ async def update_repo(*, db: AsyncSession, owner: str, name: str, branch: str) -
         repo = Repository(
             name=name,
             owner=owner,
+            branch=branch,
             etag=response.headers["etag"],
             data=_parse_response(response),
         )
         db.add(repo)
         await db.commit()
 
-    return repo
+    return repo.id
 
 
 async def get_repo(*, db: AsyncSession, repo_id: int) -> Repository:
@@ -112,7 +113,7 @@ async def get_root_directory(*, db: AsyncSession, repo_id: int) -> Directory:
     q = await db.scalars(
         select(val)
         .select_from(repo_subq, func.jsonb_array_elements(repo_subq.data).alias())
-        .where(val.contains({"parent": "/"}))
+        .where(val.contains({"parent": ""}))
         .where(val.contains({"type": "tree"}))
     )
 
@@ -144,7 +145,7 @@ async def get_random_file_path(*, db: AsyncSession, repo_id: int) -> str:
     q = await db.scalars(
         select(val)
         .select_from(repo_subq, func.jsonb_array_elements(repo_subq.data).alias())
-        .where(val.contains({"type": "tree"}))
+        .where(val.contains({"type": "blob"}))
     )
 
     return random.choice(q.all())["path"]
