@@ -1,9 +1,6 @@
 from fastapi import APIRouter
 from schemas.repository import Directory
-from services import (
-    get_directory as get_directory_service,
-    get_root_directory as get_root_directory_service,
-)
+from services import get_directory as get_directory_service, get_root_directory as get_root_directory_service
 from app.dependencies import get_session
 
 
@@ -20,7 +17,7 @@ router = APIRouter(
 )
 async def get_root_directory(id: int):
     async with get_session() as session:
-        root_directory =  get_root_directory_service(db = session, repo_id = id)
+        root_directory = get_root_directory_service(db=session, repo_id=id)
     return root_directory
 
 
@@ -31,5 +28,5 @@ async def get_root_directory(id: int):
 )
 async def get_directory(id: int, directory_id: str):
     async with get_session() as session:
-        directory = get_directory_service( db = session, repo_id = id, directory_id = directory_id)
+        directory = get_directory_service(db=session, repo_id=id, directory_id=directory_id)
     return directory
