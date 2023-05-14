@@ -2,9 +2,6 @@ from fastapi import APIRouter
 from schemas.game import GameInfo, GameResults, GameStartConfig, PlayerAnswer
 import services.game_service
 import services.repository_service
-from services.game_service import start_game as start_game_service
-from services.game_service import get_game as get_game_service
-from services.game_service import give_answer as give_answer_service
 from app.dependencies import get_session
 
 router = APIRouter(
