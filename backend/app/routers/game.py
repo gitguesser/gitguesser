@@ -63,3 +63,12 @@ async def get_game_results(id: int, session: AsyncSession = Depends(get_session)
 async def send_answer(id: int, answer: PlayerAnswer, session: AsyncSession = Depends(get_session)):
     services.game_service.give_answer(db=session, game_id=id, answer=answer)
     return
+
+@router.get(
+    "/{id}",
+    response_model=Repository,
+    description="Returns information about a repository with given id.",
+)
+async def get_repository(session: AsyncSession = Depends(get_session), id: int):
+    repository = services.repository_service.get_repo(db=session, repo_id=id)
+    return repository
