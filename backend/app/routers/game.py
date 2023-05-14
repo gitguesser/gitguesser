@@ -34,7 +34,7 @@ async def start_game(
 
 @router.get(
     "/{id}",
-    response_model=Game,
+    response_model=GameInfo,
     description="Retrieves information about a game with given id.",
 )
 async def get_game_info(id: int, session: AsyncSession = Depends(get_session)):
@@ -44,7 +44,7 @@ async def get_game_info(id: int, session: AsyncSession = Depends(get_session)):
 
 @router.get(
     "/{id}/results",
-    response_model=Game,
+    response_model=GameResults,
     description="Retrieves results of finished game with given id.",
 )
 async def get_game_results(id: int, session: AsyncSession = Depends(get_session)):
