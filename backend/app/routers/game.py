@@ -1,5 +1,12 @@
 from fastapi import APIRouter, Depends
-from schemas.game import Game, GameInfo, GameResults, GameStartConfig, PlayerAnswer, Repository
+from schemas.game import (
+    Game,
+    GameInfo,
+    GameResults,
+    GameStartConfig,
+    PlayerAnswer,
+    Repository,
+)
 import services.game_service
 import services.repository_service
 from app.dependencies import get_session
@@ -15,8 +22,12 @@ router = APIRouter(
     response_model=Game,
     description="Starts a new game.",
 )
-async def start_game(game_start_config: GameStartConfig, session: AsyncSession = Depends(get_session)):
-    game_id = services.game_service.start_game(db=session, game_config=game_start_config)
+async def start_game(
+    game_start_config: GameStartConfig, session: AsyncSession = Depends(get_session)
+):
+    game_id = services.game_service.start_game(
+        db=session, game_config=game_start_config
+    )
     return game_id
 
 
@@ -28,7 +39,7 @@ async def start_game(game_start_config: GameStartConfig, session: AsyncSession =
 async def get_game_info(id: int, session: AsyncSession = Depends(get_session)):
     game = await services.game_service.get_game(db=session, game_id=id)
     return game
-    
+
 
 @router.get(
     "/{id}/results",
@@ -41,7 +52,9 @@ async def get_game_results(id: int, session: AsyncSession = Depends(get_session)
 
 
 @router.post("/{id}", description="Sends player answer for a game with given id.")
-async def send_answer(id: int, answer: PlayerAnswer, session: AsyncSession = Depends(get_session)):
+async def send_answer(
+    id: int, answer: PlayerAnswer, session: AsyncSession = Depends(get_session)
+):
     services.game_service.give_answer(db=session, game_id=id, answer=answer)
     return
 
