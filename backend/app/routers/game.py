@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends
+from sqlalchemy.orm import AsyncSession
 from schemas.game import (
     Game,
     GameInfo,
