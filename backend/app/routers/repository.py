@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from schemas.repository import Directory
-from services import (
+from services.repository_service import (
     get_directory as get_directory_service,
     get_root_directory as get_root_directory_service,
 )
