@@ -68,7 +68,7 @@ async def get_directory(
     Raises a 404 HTTPException if the repository does not exist or it
     does not contain this directory.
     """
-    get_repo(db=db, repo_id=repo_id)
+    await get_repo(db=db, repo_id=repo_id)
 
     val = literal_column("value", type_=JSONB)
 
@@ -106,7 +106,7 @@ async def get_root_directory(*, db: AsyncSession, repo_id: int) -> Directory:
 
     Raises a 404 HTTPException if the repository does not exist.
     """
-    get_repo(db=db, repo_id=repo_id)
+    await get_repo(db=db, repo_id=repo_id)
 
     val = literal_column("value", type_=JSONB)
 
@@ -136,7 +136,7 @@ async def get_random_file_path(*, db: AsyncSession, repo_id: int) -> str:
     Raises a 404 HTTPException if the repository does not exist.
     The returned path is in the format 'a/b/c/file.txt'.
     """
-    get_repo(db=db, repo_id=repo_id)
+    await get_repo(db=db, repo_id=repo_id)
 
     val = literal_column("value", type_=JSONB)
 
