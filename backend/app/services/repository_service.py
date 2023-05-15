@@ -74,6 +74,7 @@ async def get_directory(
     directory = await db.scalar(
         select(val)
         .select_from(Repository, func.jsonb_array_elements(Repository.data).alias())
+        .where(Repository.id == int(repo_id))
         .where(val.contains({"sha": directory_id}))
     )
 
@@ -83,6 +84,7 @@ async def get_directory(
     q = await db.scalars(
         select(val)
         .select_from(Repository, func.jsonb_array_elements(Repository.data).alias())
+        .where(Repository.id == int(repo_id))
         .where(val.contains({"parent": directory["path"]}))
         .where(val.contains({"type": "tree"}))
     )
@@ -107,12 +109,10 @@ async def get_root_directory(*, db: AsyncSession, repo_id: int) -> Directory:
 
     val = literal_column("value", type_=JSONB)
 
-    subq = select(Repository).where(Repository.id == int(repo_id)).subquery()
-    repo_subq = aliased(Repository, subq)
-
     q = await db.scalars(
         select(val)
-        .select_from(repo_subq, func.jsonb_array_elements(repo_subq.data).alias())
+        .select_from(Repository, func.jsonb_array_elements(Repository.data).alias())
+        .where(Repository.id == int(repo_id))
         .where(val.contains({"parent": ""}))
         .where(val.contains({"type": "tree"}))
     )
@@ -139,12 +139,10 @@ async def get_random_file_path(*, db: AsyncSession, repo_id: int) -> str:
 
     val = literal_column("value", type_=JSONB)
 
-    subq = select(Repository).where(Repository.id == int(repo_id)).subquery()
-    repo_subq = aliased(Repository, subq)
-
     q = await db.scalars(
         select(val)
-        .select_from(repo_subq, func.jsonb_array_elements(repo_subq.data).alias())
+        .select_from(Repository, func.jsonb_array_elements(Repository.data).alias())
+        .where(Repository.id == int(repo_id))
         .where(val.contains({"type": "blob"}))
     )
 
