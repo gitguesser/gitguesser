@@ -34,11 +34,13 @@ jobs:
         run: |
           pip install autoflake isort black
           npm install prettier@2.7.1 eslint eslint-config-react-app
-      - name: Check code style
+      - name: Check backend code style
         run: |
           autoflake --remove-all-unused-imports --recursive --remove-unused-variables --check backend
           isort backend --profile black --check-only
           black backend --check
+      - name: Check frontend code style
+        run: |
           npx prettier --check frontend
           npx eslint frontend
           
