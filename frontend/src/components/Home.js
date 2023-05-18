@@ -11,8 +11,9 @@ function Home() {
     <>
       <h1>Home</h1>
       <div>Game id:</div>
-      <input type="text" onChange={e => setGameId(e.target.value)} />
-      <br></br><br></br>
+      <input type="text" onChange={(e) => setGameId(e.target.value)} />
+      <br></br>
+      <br></br>
       <button onClick={startGame}>Start a game</button>
     </>
   );
