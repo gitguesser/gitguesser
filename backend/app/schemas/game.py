@@ -7,6 +7,7 @@ class GameStartConfig(BaseModel):
     player_name: str
     repo_name: str
     repo_owner: str
+    repo_branch: str
 
 
 class GameInfo(BaseModel):
@@ -15,6 +16,7 @@ class GameInfo(BaseModel):
     player_name: str
     repo_name: str
     repo_owner: str
+    repo_branch: str
     start_time: datetime
 
     class Config:

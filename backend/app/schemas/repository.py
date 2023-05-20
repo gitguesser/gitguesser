@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 
 class DirectoryInfo(BaseModel):
-    directory_id: str
+    id: str
     name: str
 
 

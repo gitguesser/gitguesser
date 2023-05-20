@@ -1,17 +1,16 @@
+import datetime
+
+from database import Base
 from sqlalchemy import Column, DateTime, ForeignKey, Index, Integer, String
 from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-
-# After adding database will be removed.
-Base = declarative_base()
 
 
 class Game(Base):
     __tablename__ = "games"
 
     id = Column(Integer, primary_key=True, index=True)
-    repository_id = Column(Integer, ForeignKey("repos.id"), nullable=False)
+    repository_id = Column(Integer, ForeignKey("repositories.id"), nullable=False)
     start_time = Column(DateTime, nullable=False)
     end_time = Column(DateTime)
     player_name = Column(String, nullable=False)
@@ -29,8 +28,9 @@ class Repository(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
     owner = Column(String, nullable=False)
-    ETag = Column(String, nullable=False)
+    branch = Column(String, nullable=False)
+    etag = Column(String, nullable=False)
     data = Column(JSONB, nullable=False)
-    creation_date = Column(DateTime, nullable=False)
+    creation_date = Column(DateTime, nullable=False, default=datetime.datetime.utcnow)
 
     games = relationship("Game", back_populates="repository")
