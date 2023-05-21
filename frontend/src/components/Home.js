@@ -10,7 +10,7 @@ function Home() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const options = {
@@ -25,19 +25,19 @@ function Home() {
     };
 
     fetch("/api/game/", options)
-      .then(response => {
+      .then((response) => {
         if (response.ok) {
           return response.json();
         }
-        return response.json().then(e => {
+        return response.json().then((e) => {
           throw new Error(e.detail || "Unknown error");
         });
       })
-      .then(json => {
+      .then((json) => {
         const gameId = json.game_id;
         navigate("game", { state: { gameId } });
       })
-      .catch(e => {
+      .catch((e) => {
         const message = "Error occurred: " + e.message;
         console.log(message);
         setError(message);
@@ -55,7 +55,7 @@ function Home() {
       <h1>gitguesser</h1>
       <br />
       <form onSubmit={handleSubmit}>
-        {inputs.map(({ label, value, onChange }, index) =>
+        {inputs.map(({ label, value, onChange }, index) => (
           <div key={index}>
             <div>
               <label htmlFor={index}>{label}:</label>
@@ -64,13 +64,13 @@ function Home() {
                 type="text"
                 id={index}
                 value={value}
-                onChange={e => onChange(e.target.value)}
+                onChange={(e) => onChange(e.target.value)}
                 required
               />
             </div>
             <br />
           </div>
-        )}
+        ))}
         <br />
         <button type="submit">Start game</button>
       </form>
