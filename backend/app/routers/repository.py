@@ -1,4 +1,3 @@
-import services.repository_service
 from app.dependencies import get_session
 from fastapi import APIRouter, Depends
 from schemas.repository import Directory
@@ -25,6 +24,10 @@ async def get_root_directory(id: int, session: AsyncSession = Depends(get_sessio
     response_model=Directory,
     description="Returns directory with given id that belongs to the repository.",
 )
-async def get_directory(id: int, directory_id: str, session: AsyncSession = Depends(get_session)):
-    directory = repository_service.get_directory(db=session, repo_id=id, directory_id=directory_id)
+async def get_directory(
+    id: int, directory_id: str, session: AsyncSession = Depends(get_session)
+):
+    directory = repository_service.get_directory(
+        db=session, repo_id=id, directory_id=directory_id
+    )
     return directory
