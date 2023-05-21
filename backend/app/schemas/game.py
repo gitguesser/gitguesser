@@ -7,6 +7,7 @@ class GameStartConfig(BaseModel):
     player_name: str
     repo_name: str
     repo_owner: str
+    repo_branch: str
 
 
 class GameInfo(BaseModel):
@@ -17,7 +18,6 @@ class GameInfo(BaseModel):
 
     class Config:
         orm_mode = True
-
 
 class GameResults(GameInfo):
     end_time: datetime
