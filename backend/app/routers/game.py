@@ -1,5 +1,7 @@
+import services.game_service
+import services.repository_service
+from app.dependencies import get_session
 from fastapi import APIRouter, Depends
-from sqlalchemy.orm import AsyncSession
 from schemas.game import (
     Game,
     GameInfo,
@@ -8,9 +10,7 @@ from schemas.game import (
     PlayerAnswer,
     Repository,
 )
-import services.game_service
-import services.repository_service
-from app.dependencies import get_session
+from sqlalchemy.orm import AsyncSession
 
 router = APIRouter(
     prefix="/game",
