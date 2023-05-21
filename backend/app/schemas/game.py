@@ -19,6 +19,7 @@ class GameInfo(BaseModel):
     class Config:
         orm_mode = True
 
+
 class GameResults(GameInfo):
     end_time: datetime
     score: int
