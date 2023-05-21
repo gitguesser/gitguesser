@@ -3,7 +3,6 @@ import services.repository_service
 from app.dependencies import get_session
 from fastapi import APIRouter, Depends
 from schemas.game import (
-    Game,
     GameInfo,
     GameResults,
     GameStartConfig,
