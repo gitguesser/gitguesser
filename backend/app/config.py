@@ -1,3 +1,5 @@
+import sys
+
 from pydantic import BaseSettings
 
 
@@ -8,18 +10,17 @@ class Settings(BaseSettings):
     initialized using the values from both environment variables and
     the content of .env file.
     """
-
-    # We don't provide this values currently and our app won't start without them
-    # postgres_user: str
-    # postgres_password: str
-    # postgres_server: str
-    # postgres_port: int
-    # postgres_db: str
-    database_url: str
+    postgres_user: str
+    postgres_password: str
+    postgres_server: str
+    postgres_port: int
+    postgres_db: str
+    github_username: str | None
+    github_token: str | None
 
     class Config:
         case_sensitive = False
-        env_file = ".env"
+        env_file = ".env" if "pytest" not in sys.modules else ".env.test"
         env_file_encoding = "utf-8"
 
 

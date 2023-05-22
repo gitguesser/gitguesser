@@ -1,11 +1,8 @@
 services:
   db:
     image: postgres:15.2
+    env_file: .env
     restart: always
-    environment:
-      POSTGRES_USER: gitguesser
-      POSTGRES_PASSWORD: gitguesser
-      POSTGRES_DB: gitguesser_db
     expose:
       - 5432
     volumes:
@@ -13,14 +10,13 @@ services:
 
   backend:
     build: ./backend
-    working_dir: /backend/backend/app # Fixes not loading local modules.
-    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; uvicorn main:app --host 0.0.0.0'
+    working_dir: /backend/backend
+    env_file: .env
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; uvicorn app.main:app --host 0.0.0.0'
     volumes:
       - .:/backend
     ports:
       - 8000:8000
-    environment:
-      - DATABASE_URL=postgresql+asyncpg://gitguesser:gitguesser@db:5432/gitguesser_db
     depends_on:
       - db
 
