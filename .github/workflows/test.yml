@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Create .env.test file
+        run: echo "${{ vars.ENV_TEST_FILE }}" > .env.test
       - name: Build and run containers
         run: docker-compose -f compose.yaml up -d --build
       - name: Run tests
