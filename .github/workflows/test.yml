@@ -1,4 +1,4 @@
-name: Testing and Style Check
+name: Testing
 
 on:
   push:
