@@ -13,7 +13,7 @@ jobs:
       - name: Build and run containers
         run: docker-compose up -d --build
       - name: Run tests
-        run: docker-compose -w /backend exec --tty backend pytest
+        run: docker-compose exec -w /backend --tty backend pytest
       - name: Stop containers
         run: docker-compose down
 
