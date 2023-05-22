@@ -1,8 +1,8 @@
 import datetime
 
 from app.models.models import Game
-from app.services.repository_service import get_random_file_path, update_repo
 from app.schemas.game import GameStartConfig
+from app.services.repository_service import get_random_file_path, update_repo
 from fastapi import HTTPException
 from sqlalchemy import select, update
 from sqlalchemy.ext.asyncio import AsyncSession
