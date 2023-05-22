@@ -1,5 +1,5 @@
-from fastapi import APIRouter
 from app.schemas.game import GameInfo, GameResults, GameStartConfig, PlayerAnswer
+from fastapi import APIRouter
 
 router = APIRouter(
     prefix="/game",

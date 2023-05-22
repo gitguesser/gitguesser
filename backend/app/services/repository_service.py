@@ -1,14 +1,13 @@
 import random
 
 import httpx
+from app.config import settings
+from app.models.models import Repository
+from app.schemas.repository import Directory, DirectoryInfo
 from fastapi import HTTPException, status
 from sqlalchemy import func, literal_column, select
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.ext.asyncio import AsyncSession
-
-from app.models.models import Repository
-from app.schemas.repository import Directory, DirectoryInfo
-from app.config import settings
 
 
 async def update_repo(*, db: AsyncSession, owner: str, name: str, branch: str) -> int:

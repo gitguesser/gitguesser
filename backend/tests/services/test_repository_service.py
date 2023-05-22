@@ -1,10 +1,8 @@
 import pytest
+from app.models.models import Repository
+from app.services import repository_service
 from fastapi import HTTPException
 from sqlalchemy import func, select
-
-from app.services import repository_service
-from app.models.models import Repository
-
 
 CORRECT_REPOSITORY = [
     {

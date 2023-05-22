@@ -1,18 +1,16 @@
 import pytest
+from app.models.models import Game
+from app.schemas.game import GameStartConfig
+from app.services import game_service
 from fastapi import HTTPException
 from sqlalchemy import func, select
-
-from app.services import game_service
-from app.schemas.game import GameStartConfig
-from app.models.models import Game
-
 
 CORRECT_GAME_START_CONFIG = [
     GameStartConfig(
         player_name="player",
         repo_name="gitguesser",
         repo_owner="gitguesser",
-        repo_branch="main"
+        repo_branch="main",
     ),
 ]
 
@@ -21,20 +19,22 @@ INCORRECT_GAME_START_CONFIG = [
         player_name="player",
         repo_name="gitguesser",
         repo_owner="abcd",
-        repo_branch="main"
+        repo_branch="main",
     ),
     GameStartConfig(
         player_name="player",
         repo_name="gitguesser",
         repo_owner="gitguesser",
-        repo_branch="master"
+        repo_branch="master",
     ),
 ]
 
 
 @pytest.fixture
 async def game_id(db):
-    return await game_service.start_game(db=db, game_config=CORRECT_GAME_START_CONFIG[0])
+    return await game_service.start_game(
+        db=db, game_config=CORRECT_GAME_START_CONFIG[0]
+    )
 
 
 async def _count(db):

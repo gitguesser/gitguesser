@@ -1,5 +1,5 @@
 import pytest
-from app.database import Base, engine, async_session
+from app.database import Base, async_session, engine
 from sqlalchemy import delete
 
 
