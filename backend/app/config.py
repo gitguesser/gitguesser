@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     initialized using the values from both environment variables and
     the content of .env file.
     """
+
     postgres_user: str
     postgres_password: str
     postgres_server: str
