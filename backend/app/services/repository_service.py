@@ -1,7 +1,6 @@
 import random
 
 import httpx
-from app.config import settings
 from app.models.models import Repository
 from app.schemas.repository import Directory, DirectoryInfo
 from fastapi import HTTPException, status
@@ -31,10 +30,7 @@ async def update_repo(*, db: AsyncSession, owner: str, name: str, branch: str) -
     endpoint = (
         f"https://api.github.com/repos/{owner}/{name}/git/trees/{branch}?recursive=true"
     )
-    auth = None
-    if settings.github_username and settings.github_token:
-        auth = (settings.github_username, settings.github_token)
-    async with httpx.AsyncClient(auth=auth) as client:
+    async with httpx.AsyncClient() as client:
         if repo is None:
             response = await client.get(endpoint)
         else:
