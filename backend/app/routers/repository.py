@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from schemas.repository import Directory
+from app.schemas.repository import Directory
 
 router = APIRouter(
     prefix="/repository",

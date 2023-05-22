@@ -6,8 +6,8 @@ from sqlalchemy import func, literal_column, select
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from ..models.models import Repository
-from ..schemas.repository import Directory, DirectoryInfo
+from app.models.models import Repository
+from app.schemas.repository import Directory, DirectoryInfo
 
 
 async def update_repo(*, db: AsyncSession, owner: str, name: str, branch: str) -> int:
