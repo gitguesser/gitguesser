@@ -11,11 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build and run containers
-        run: docker-compose -f compose.yaml up -d --build
+        run: docker-compose up -d --build
       - name: Run tests
-        run: docker-compose -f compose.yaml exec --tty backend pytest
+        run: docker-compose -w /backend exec --tty backend pytest
       - name: Stop containers
-        run: docker-compose -f compose.yaml down
+        run: docker-compose down
 
   style-check:
     runs-on: ubuntu-latest
