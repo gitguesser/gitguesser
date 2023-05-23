@@ -31,7 +31,10 @@ async def update_repo(*, db: AsyncSession, owner: str, name: str, branch: str) -
     endpoint = (
         f"https://api.github.com/repos/{owner}/{name}/git/trees/{branch}?recursive=true"
     )
-    async with httpx.AsyncClient() as client:
+    auth = None
+    if settings.github_username and settings.github_token:
+        auth = (settings.github_username, settings.github_token)
+    async with httpx.AsyncClient(auth=auth) as client:
         if repo is None:
             response = await client.get(endpoint)
         else:
