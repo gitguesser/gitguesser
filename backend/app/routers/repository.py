@@ -15,7 +15,7 @@ router = APIRouter(
     description="Returns root directory of the repository with given id.",
 )
 async def get_root_directory(id: int, session: AsyncSession = Depends(get_session)):
-    root_directory = repository_service.get_root_directory(db=session, repo_id=id)
+    root_directory = await repository_service.get_root_directory(db=session, repo_id=id)
     return root_directory
 
 
