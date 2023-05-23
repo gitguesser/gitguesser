@@ -2,6 +2,8 @@ from datetime import datetime
 
 from pydantic import BaseModel
 
+class GameWithId(BaseModel):
+    game_id: int
 
 class GameStartConfig(BaseModel):
     player_name: str
