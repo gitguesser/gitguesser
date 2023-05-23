@@ -55,7 +55,7 @@ async def get_game_results(id: int, session: AsyncSession = Depends(get_session)
 async def send_answer(
     id: int, answer: PlayerAnswer, session: AsyncSession = Depends(get_session)
 ):
-    services.game_service.give_answer(db=session, game_id=id, answer=answer)
+    await services.game_service.give_answer(db=session, game_id=id, answer=answer)
     return
 
 
