@@ -65,5 +65,5 @@ async def send_answer(
     description="Returns information about a repository with given id.",
 )
 async def get_repository(id: int, session: AsyncSession = Depends(get_session)):
-    repository = services.repository_service.get_repo(db=session, repo_id=id)
+    repository = await services.repository_service.get_repo(db=session, repo_id=id)
     return repository
