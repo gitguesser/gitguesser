@@ -1,6 +1,6 @@
 # gitguesser
 
-## CONFIGURATION
+## Configuration
 
 Environment variables are used to manage application settings.
 Alternatively, you can store them in configuration files located in the
@@ -33,7 +33,7 @@ POSTGRES_DB=gitguesser_db
 ```
 </details>
 
-### Using pre-commit for style checking(auto formatting)
+## Using pre-commit for style checking (auto formatting)
 
 Install `pre-commit`:
 ```
