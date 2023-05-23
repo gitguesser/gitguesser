@@ -1,5 +1,4 @@
-import services.game_service
-import services.repository_service
+from services import game_service, repository_service
 from app.dependencies import get_session
 from fastapi import APIRouter, Depends
 from schemas.game import (
