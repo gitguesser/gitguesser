@@ -1,4 +1,3 @@
-from app.dependencies import get_session
 from fastapi import APIRouter, Depends
 from schemas.game import (
     GameInfo,
@@ -8,6 +7,8 @@ from schemas.game import (
     PlayerAnswer,
 )
 from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.dependencies import get_session
 
 router = APIRouter(
     prefix="/game",
