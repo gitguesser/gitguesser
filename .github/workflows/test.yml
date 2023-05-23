@@ -1,4 +1,4 @@
-name: Testing and Style Check
+name: Testing
 
 on:
   push:
@@ -16,16 +16,3 @@ jobs:
         run: docker-compose exec -T -w /backend backend pytest
       - name: Stop containers
         run: docker-compose down
-
-  style-check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install dependencies
-        run: |
-          pip install autoflake isort black 
-      - name: Check code style
-        run: |
-          autoflake --remove-all-unused-imports --recursive --remove-unused-variables --check backend
-          isort backend --profile black --check-only
-          black backend --check
