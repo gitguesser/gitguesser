@@ -11,3 +11,8 @@ Install the git hook scripts:
 ```
 pre-commit install
 ```
+
+Run on all files:
+```
+pre-commit run --all-files
+```
