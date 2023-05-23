@@ -31,3 +31,12 @@ async def get_directory(
         db=session, repo_id=id, directory_id=directory_id
     )
     return directory
+
+@router.get(
+    "/{id}",
+    response_model=Repository,
+    description="Returns information about a repository with given id.",
+)
+async def get_repository(id: int, session: AsyncSession = Depends(get_session)):
+    repository = await services.repository_service.get_repo(db=session, repo_id=id)
+    return repository
