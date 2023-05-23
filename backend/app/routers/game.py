@@ -9,7 +9,7 @@ from schemas.game import (
     PlayerAnswer,
     Repository,
 )
-from sqlalchemy.orm import AsyncSession
+from sqlalchemy.ext.asyncio import AsyncSession
 
 router = APIRouter(
     prefix="/game",
