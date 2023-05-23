@@ -1,7 +1,7 @@
 from app.dependencies import get_session
 from fastapi import APIRouter, Depends
 from schemas.repository import Directory
-from sqlalchemy.orm import AsyncSession
+from sqlalchemy.ext.asyncio import AsyncSession
 
 router = APIRouter(
     prefix="/repository",
