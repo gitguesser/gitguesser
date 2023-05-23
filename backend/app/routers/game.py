@@ -2,6 +2,7 @@ from services import game_service, repository_service
 from app.dependencies import get_session
 from fastapi import APIRouter, Depends
 from schemas.game import (
+    GameWithId
     GameInfo,
     GameResults,
     GameStartConfig,
@@ -18,7 +19,7 @@ router = APIRouter(
 
 @router.post(
     "/",
-    response_model=Game,
+    response_model=GameWithId,
     description="Starts a new game.",
 )
 async def start_game(
