@@ -1,8 +1,8 @@
-from config import settings
-from database import init_models
+from app.config import settings
+from app.database import init_models
+from app.routers import game
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import game
 
 app = FastAPI()
 

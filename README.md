@@ -44,3 +44,8 @@ Install the git hook scripts:
 ```
 pre-commit install
 ```
+
+Run on all files manually:
+```
+pre-commit run --all-files
+```
