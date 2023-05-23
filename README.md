@@ -2,9 +2,9 @@
 
 ## CONFIGURATION
 
-Environment variables are used to manage application settings. 
-Alternatively, you can store them in configuration files located in the 
-project's root directory. The default configuration file is `.env`. During 
+Environment variables are used to manage application settings.
+Alternatively, you can store them in configuration files located in the
+project's root directory. The default configuration file is `.env`. During
 testing with `pytest`, the configuration is read from `.env.test`.
 
 The following variables are required:
@@ -32,3 +32,15 @@ POSTGRES_PORT=5432
 POSTGRES_DB=gitguesser_db
 ```
 </details>
+
+### Using pre-commit for style checking(auto formatting)
+
+Install `pre-commit`:
+```
+pip install pre-commit
+```
+
+Install the git hook scripts:
+```
+pre-commit install
+```
