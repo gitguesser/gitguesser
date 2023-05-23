@@ -12,7 +12,9 @@ services:
     build: ./backend
     working_dir: /backend/backend/app # Fixes not loading local modules.
     env_file: .env
-    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; uvicorn app.main:app --host 0.0.0.0'
+    environment:
+      - FRONTEND_URL=http://localhost:3000
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; uvicorn main:app --host 0.0.0.0'
     volumes:
       - .:/backend
     ports:
@@ -22,6 +24,8 @@ services:
 
   frontend:
     build: ./frontend
+    environment:
+      - REACT_APP_BACKEND_URL=http://localhost:8000
     command: npm start
     ports:
       - 3000:3000

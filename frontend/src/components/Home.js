@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "../config";
 
 function Home() {
   const [playerName, setPlayerName] = useState("");
@@ -15,7 +16,6 @@ function Home() {
 
     const options = {
       method: "POST",
-
       body: JSON.stringify({
         player_name: playerName,
         repo_name: name,
@@ -24,7 +24,7 @@ function Home() {
       }),
     };
 
-    fetch("/api/game/", options)
+    fetch(`${BACKEND_URL}/game/`, options)
       .then((response) => {
         if (response.ok) {
           return response.json();
