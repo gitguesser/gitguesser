@@ -27,7 +27,7 @@ async def get_root_directory(id: int, session: AsyncSession = Depends(get_sessio
 async def get_directory(
     id: int, directory_id: str, session: AsyncSession = Depends(get_session)
 ):
-    directory = repository_service.get_directory(
+    directory = await repository_service.get_directory(
         db=session, repo_id=id, directory_id=directory_id
     )
     return directory
