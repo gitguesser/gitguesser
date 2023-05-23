@@ -1,6 +1,7 @@
 import random
 
 import httpx
+from app.config import settings
 from app.models.models import Repository
 from app.schemas.repository import Directory, DirectoryInfo
 from fastapi import HTTPException, status
