@@ -25,7 +25,7 @@ router = APIRouter(
 async def start_game(
     game_start_config: GameStartConfig, session: AsyncSession = Depends(get_session)
 ):
-    game_id = services.game_service.start_game(
+    game_id = await services.game_service.start_game(
         db=session, game_config=game_start_config
     )
     return game_id
