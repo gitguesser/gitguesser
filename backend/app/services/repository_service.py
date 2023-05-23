@@ -1,13 +1,13 @@
 import random
 
 import httpx
+from app.config import settings
+from app.models.models import Repository
+from app.schemas.repository import Directory, DirectoryInfo
 from fastapi import HTTPException, status
 from sqlalchemy import func, literal_column, select
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.ext.asyncio import AsyncSession
-
-from ..models.models import Repository
-from ..schemas.repository import Directory, DirectoryInfo
 
 
 async def update_repo(*, db: AsyncSession, owner: str, name: str, branch: str) -> int:
@@ -15,7 +15,7 @@ async def update_repo(*, db: AsyncSession, owner: str, name: str, branch: str) -
 
     If the repository is already saved, then it checks if the newest one has
     been updated since saving it (using ETag). If there are any updates, it saves
-    a new copy to the database.
+    a new copy to the database. If the repository does not exist, raises a 404 HTTPException.
     """
     repo = await db.scalar(
         select(Repository)
@@ -31,13 +31,16 @@ async def update_repo(*, db: AsyncSession, owner: str, name: str, branch: str) -
     endpoint = (
         f"https://api.github.com/repos/{owner}/{name}/git/trees/{branch}?recursive=true"
     )
-    async with httpx.AsyncClient() as client:
+    auth = None
+    if settings.github_username and settings.github_token:
+        auth = (settings.github_username, settings.github_token)
+    async with httpx.AsyncClient(auth=auth) as client:
         if repo is None:
             response = await client.get(endpoint)
         else:
             response = await client.get(endpoint, headers={"If-None-Match": repo.etag})
 
-    if response.status_code != status.HTTP_304_NOT_MODIFIED:
+    if response.status_code == status.HTTP_200_OK:
         repo = Repository(
             name=name,
             owner=owner,
@@ -47,6 +50,10 @@ async def update_repo(*, db: AsyncSession, owner: str, name: str, branch: str) -
         )
         db.add(repo)
         await db.commit()
+    elif response.status_code == status.HTTP_404_NOT_FOUND:
+        raise HTTPException(status_code=404, detail="Repository not found")
+    elif response.status_code != status.HTTP_304_NOT_MODIFIED:
+        raise HTTPException(status_code=404, detail="Error connecting to GitHub API")
 
     return repo.id
 

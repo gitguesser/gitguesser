@@ -1,6 +1,6 @@
-from database import init_models
+from app.database import init_models
+from app.routers import game
 from fastapi import FastAPI
-from routers import game
 
 app = FastAPI()
 

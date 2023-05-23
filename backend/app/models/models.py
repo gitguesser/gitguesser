@@ -1,6 +1,6 @@
 import datetime
 
-from database import Base
+from app.database import Base
 from sqlalchemy import Column, DateTime, ForeignKey, Index, Integer, String
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import relationship
