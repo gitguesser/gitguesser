@@ -51,7 +51,7 @@ function Home() {
     { label: "Repository branch", value: branch, onChange: setBranch },
   ];
   return (
-    <div>
+    <>
       <h1>gitguesser</h1>
       <br />
       <form onSubmit={handleSubmit}>
@@ -75,7 +75,7 @@ function Home() {
         <button type="submit">Start game</button>
       </form>
       {error !== null && <div>{error}</div>}
-    </div>
+    </>
   );
 }
 
