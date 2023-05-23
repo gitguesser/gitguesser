@@ -10,7 +10,7 @@ services:
 
   backend:
     build: ./backend
-    working_dir: /backend/backend/app # Fixes not loading local modules.
+    working_dir: /backend/backend
     env_file: .env
     command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; uvicorn app.main:app --host 0.0.0.0'
     volumes:

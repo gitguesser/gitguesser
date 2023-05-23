@@ -15,9 +15,8 @@ jobs:
       - name: Create .env.test file
         run: echo "${{ vars.ENV_TEST_FILE }}" > .env.test
       - name: Build and run containers
-        run: docker-compose -f compose.yaml up -d --build
+        run: docker-compose up -d --build
       - name: Run tests
-        run: docker-compose -f compose.yaml exec --tty backend pytest
+        run: docker-compose exec -T -w /backend backend pytest
       - name: Stop containers
-        run: docker-compose -f compose.yaml down
-          
+        run: docker-compose down
