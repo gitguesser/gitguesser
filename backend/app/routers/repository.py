@@ -32,6 +32,7 @@ async def get_directory(
     )
     return directory
 
+
 @router.get(
     "/{id}",
     response_model=Repository,
