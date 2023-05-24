@@ -1,4 +1,4 @@
-from app.dependencies import get_session
+from dependencies import get_session
 from fastapi import APIRouter, Depends
 from schemas.game import (
     GameInfo,
