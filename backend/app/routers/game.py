@@ -1,6 +1,4 @@
 from app.dependencies import get_session
-from fastapi import APIRouter, Depends
-from app.services import game_service
 from app.schemas.game import (
     GameInfo,
     GameResults,
@@ -8,6 +6,8 @@ from app.schemas.game import (
     GameWithId,
     PlayerAnswer,
 )
+from app.services import game_service
+from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
 router = APIRouter(
@@ -24,9 +24,7 @@ router = APIRouter(
 async def start_game(
     game_start_config: GameStartConfig, session: AsyncSession = Depends(get_session)
 ):
-    game_id = await game_service.start_game(
-        db=session, game_config=game_start_config
-    )
+    game_id = await game_service.start_game(db=session, game_config=game_start_config)
     return game_id
 
 

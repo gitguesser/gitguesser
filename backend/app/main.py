@@ -7,6 +7,7 @@ app = FastAPI()
 app.include_router(game.router)
 app.include_router(repository.router)
 
+
 @app.on_event("startup")
 async def on_startup():
     await init_models()
