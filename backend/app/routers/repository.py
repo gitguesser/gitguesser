@@ -1,7 +1,8 @@
 from app.dependencies import get_session
 from fastapi import APIRouter, Depends
-from schemas.repository import Directory
+from app.schemas.repository import Directory, Repository
 from sqlalchemy.ext.asyncio import AsyncSession
+from app.services import repository_service
 
 router = APIRouter(
     prefix="/repository",
@@ -39,5 +40,5 @@ async def get_directory(
     description="Returns information about a repository with given id.",
 )
 async def get_repository(id: int, session: AsyncSession = Depends(get_session)):
-    repository = await services.repository_service.get_repo(db=session, repo_id=id)
+    repository = await repository_service.get_repo(db=session, repo_id=id)
     return repository

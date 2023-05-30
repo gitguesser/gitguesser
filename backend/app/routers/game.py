@@ -1,6 +1,7 @@
-from dependencies import get_session
+from app.dependencies import get_session
 from fastapi import APIRouter, Depends
-from schemas.game import (
+from app.services import game_service
+from app.schemas.game import (
     GameInfo,
     GameResults,
     GameStartConfig,
@@ -23,7 +24,7 @@ router = APIRouter(
 async def start_game(
     game_start_config: GameStartConfig, session: AsyncSession = Depends(get_session)
 ):
-    game_id = await services.game_service.start_game(
+    game_id = await game_service.start_game(
         db=session, game_config=game_start_config
     )
     return game_id
@@ -35,7 +36,7 @@ async def start_game(
     description="Retrieves information about a game with given id.",
 )
 async def get_game_info(id: int, session: AsyncSession = Depends(get_session)):
-    game = await services.game_service.get_game(db=session, game_id=id)
+    game = await game_service.get_game(db=session, game_id=id)
     return game
 
 
@@ -45,7 +46,7 @@ async def get_game_info(id: int, session: AsyncSession = Depends(get_session)):
     description="Retrieves results of finished game with given id.",
 )
 async def get_game_results(id: int, session: AsyncSession = Depends(get_session)):
-    game = await services.game_service.get_game(db=session, game_id=id)
+    game = await game_service.get_game(db=session, game_id=id)
     return game
 
 
@@ -53,5 +54,5 @@ async def get_game_results(id: int, session: AsyncSession = Depends(get_session)
 async def send_answer(
     id: int, answer: PlayerAnswer, session: AsyncSession = Depends(get_session)
 ):
-    await services.game_service.give_answer(db=session, game_id=id, answer=answer)
+    await game_service.give_answer(db=session, game_id=id, answer=answer)
     return
