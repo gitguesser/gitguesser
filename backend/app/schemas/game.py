@@ -3,6 +3,10 @@ from datetime import datetime
 from pydantic import BaseModel
 
 
+class GameWithId(BaseModel):
+    game_id: int
+
+
 class GameStartConfig(BaseModel):
     player_name: str
     repo_name: str
@@ -14,9 +18,6 @@ class GameInfo(BaseModel):
     game_id: int
     repo_id: int
     player_name: str
-    repo_name: str
-    repo_owner: str
-    repo_branch: str
     start_time: datetime
 
     class Config:
