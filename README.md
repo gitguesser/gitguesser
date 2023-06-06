@@ -1,5 +1,8 @@
 # gitguesser
 
+[![Testing](https://github.com/gitguesser/gitguesser/actions/workflows/test.yml/badge.svg)](https://github.com/gitguesser/gitguesser/actions/workflows/test.yml)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/gitguesser/gitguesser/main.svg)](https://results.pre-commit.ci/latest/github/gitguesser/gitguesser/main)
+
 ## Configuration
 
 Environment variables are used to manage application settings.
@@ -10,7 +13,6 @@ testing with `pytest`, the configuration is read from `.env.test`.
 The following variables are required:
 - `POSTGRES_USER`
 - `POSTGRES_PASSWORD`
-- `POSTGRES_SERVER`
 - `POSTGRES_PORT`
 - `POSTGRES_DB`
 
@@ -27,7 +29,6 @@ Here is an example of a valid configuration file:
 ```bash
 POSTGRES_USER=gitguesser
 POSTGRES_PASSWORD=gitguesser
-POSTGRES_SERVER=db
 POSTGRES_PORT=5432
 POSTGRES_DB=gitguesser_db
 ```
