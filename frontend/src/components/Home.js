@@ -16,6 +16,9 @@ function Home() {
 
     const options = {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         player_name: playerName,
         repo_name: name,
