@@ -5,8 +5,7 @@ from sqlalchemy.orm import declarative_base, sessionmaker
 engine = create_async_engine(
     "postgresql+asyncpg://"
     f"{settings.postgres_user}:{settings.postgres_password}@"
-    f"{settings.postgres_server}:{settings.postgres_port}/"
-    f"{settings.postgres_db}",
+    f"db:{settings.postgres_port}/{settings.postgres_db}",
     echo=True,
 )
 Base = declarative_base()

@@ -4,9 +4,11 @@ services:
     env_file: .env
     restart: always
     expose:
-      - 5432
+      - ${POSTGRES_PORT:?}
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
+    command:
+      - -p ${POSTGRES_PORT:?}
 
   backend:
     build: ./backend
@@ -14,7 +16,7 @@ services:
     env_file: .env
     environment:
       - FRONTEND_URL=http://localhost:3000
-    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; uvicorn app.main:app --host 0.0.0.0'
+    command: bash -c 'while !</dev/tcp/db/${POSTGRES_PORT:?}; do sleep 1; done; uvicorn app.main:app --host 0.0.0.0'
     volumes:
       - .:/backend
     ports:
@@ -27,6 +29,8 @@ services:
     environment:
       - REACT_APP_BACKEND_URL=http://localhost:8000
     command: npm start
+    volumes:
+      - ./frontend/src:/frontend/src
     ports:
       - 3000:3000
     depends_on:
