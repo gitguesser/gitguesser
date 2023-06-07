@@ -13,7 +13,6 @@ class Settings(BaseSettings):
 
     postgres_user: str
     postgres_password: str
-    postgres_server: str
     postgres_port: int
     postgres_db: str
     github_username: str | None
