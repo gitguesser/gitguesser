@@ -7,8 +7,7 @@
 
 Environment variables are used to manage application settings.
 Alternatively, you can store them in configuration files located in the
-project's root directory. The default configuration file is `.env`. During
-testing with `pytest`, the configuration is read from `.env.test`.
+project's root directory. The default configuration file is `.env`.
 
 The following variables are required:
 - `POSTGRES_USER`
