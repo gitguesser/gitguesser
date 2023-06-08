@@ -44,7 +44,7 @@ async def get_game_info(id: int, session: AsyncSession = Depends(get_session)):
     description="Retrieves results of finished game with given id.",
 )
 async def get_game_results(id: int, session: AsyncSession = Depends(get_session)):
-    game = await game_service.get_game(db=session, game_id=id)
+    game = await game_service.get_game_answered(db=session, game_id=id)
     return game
 
 
@@ -52,5 +52,5 @@ async def get_game_results(id: int, session: AsyncSession = Depends(get_session)
 async def send_answer(
     id: int, answer: PlayerAnswer, session: AsyncSession = Depends(get_session)
 ):
-    await game_service.give_answer(db=session, game_id=id, answer=answer)
+    await game_service.give_answer(db=session, game_id=id, answer=answer.answer)
     return
