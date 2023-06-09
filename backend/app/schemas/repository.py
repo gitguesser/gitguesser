@@ -11,7 +11,10 @@ class Directory(DirectoryInfo):
 
 
 class Repository(BaseModel):
-    repo_id: int
-    repo_name: str
-    repo_owner: str
-    repo_branch: str
+    id: int
+    name: str
+    owner: str
+    branch: str
+
+    class Config:
+        orm_mode = True

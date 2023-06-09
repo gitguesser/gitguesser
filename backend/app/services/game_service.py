@@ -40,6 +40,16 @@ async def get_game(*, db: AsyncSession, game_id: int) -> Game:
     return game
 
 
+# Maybe add tests for it in service test.
+async def get_game_answered(*, db: AsyncSession, game_id: int) -> Game:
+    """Returns the game with given id which was answered or raises a 404 HTTPException if it does not exist."""
+    game = await db.scalar(select(Game).where(Game.id == int(game_id)))
+    if game is None or game.end_time is None:
+        raise HTTPException(status_code=404, detail="Game not found")
+
+    return game
+
+
 async def give_answer(*, db: AsyncSession, game_id: int, answer: str) -> None:
     """Gives answer to the game with given id.
 
