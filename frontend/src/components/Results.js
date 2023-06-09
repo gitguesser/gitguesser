@@ -59,7 +59,7 @@ function Results() {
 
   const startTime = new Date(gameResults.start_time);
   const endTime = new Date(gameResults.end_time);
-  const duration = Math.abs(endTime - startTime) / 1000;
+  const duration = Math.abs(endTime - startTime) / 1000; // Duration in seconds
 
   const formatDuration = (duration) => {
     const minutes = Math.floor(duration / 60);
