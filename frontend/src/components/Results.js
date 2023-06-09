@@ -13,7 +13,9 @@ function Results() {
   useEffect(() => {
     const fetchGameResults = async () => {
       try {
-        const response = await fetch(`${BACKEND_URL}/game/${state.gameId}/results/`);
+        const response = await fetch(
+          `${BACKEND_URL}/game/${state.gameId}/results/`
+        );
         if (response.ok) {
           const data = await response.json();
           setGameResults(data);
@@ -27,7 +29,9 @@ function Results() {
 
     const fetchRepository = async () => {
       try {
-        const response = await fetch(`${BACKEND_URL}/repository/${state.gameId}/`);
+        const response = await fetch(
+          `${BACKEND_URL}/repository/${state.gameId}/`
+        );
         if (response.ok) {
           const data = await response.json();
           setRepository(data);
@@ -68,7 +72,10 @@ function Results() {
       <h1>{gameResults.player_name}'s game results</h1>
       {gameResults && repository && (
         <div>
-          <div>repo: {repository.repo_owner}/{repository.repo_name}/{repository.repo_branch}</div>
+          <div>
+            repo: {repository.repo_owner}/{repository.repo_name}/
+            {repository.repo_branch}
+          </div>
           <div>your answer: {gameResults.player_answer}</div>
           <div>correct answer: {gameResults.correct_answer}</div>
           <div>time: {formatDuration(duration)}</div>
