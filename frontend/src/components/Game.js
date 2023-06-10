@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+\import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { BACKEND_URL } from "../config";
 
@@ -21,7 +21,10 @@ function Game() {
       },
     };
 
-    fetch(`${BACKEND_URL}/repository/${repositoryId}/tree/${directoryId}`, options)
+    fetch(
+      `${BACKEND_URL}/repository/${repositoryId}/tree/${directoryId}`,
+      options
+    )
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -91,12 +94,10 @@ function Game() {
       });
   }, [gameId]);
 
-
   const handleClickChoose = (directoryName) => {
     console.log(`Chose directory: ${directoryName}`);
     setAnswer(directoryName);
   };
-
 
   const handleSubmit = (answer) => {
     if (answer) {
@@ -141,7 +142,9 @@ function Game() {
             >
               {directory.name}
             </button>
-            <button onClick={() => handleClickChoose(directory.name)}>Choose</button>
+            <button onClick={() => handleClickChoose(directory.name)}>
+              Choose
+            </button>
           </li>
         ))}
       </ul>
