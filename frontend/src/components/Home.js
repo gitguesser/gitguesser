@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../config";
-import './Home.css';
+import "./Home.css";
 
 function Home() {
   const [playerName, setPlayerName] = useState("");
@@ -55,10 +55,10 @@ function Home() {
     { label: "Repository branch", value: branch, onChange: setBranch },
   ];
   return (
-    < >
+    <>
       <h1 className="title">gitguesser</h1>
       <br />
-      <form  className="form" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         {inputs.map(({ label, value, onChange }, index) => (
           <div key={index}>
             <div>
@@ -76,7 +76,9 @@ function Home() {
           </div>
         ))}
         <br />
-        <button className="startButton" type="submit">Start game</button>
+        <button className="startButton" type="submit">
+          Start game
+        </button>
       </form>
       {error !== null && <div>{error}</div>}
     </>
