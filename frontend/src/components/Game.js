@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { BACKEND_URL } from "../config";
+import "./Game.css";
 
 function Game() {
   const [error, setError] = useState(null);
@@ -9,9 +10,10 @@ function Game() {
   const [playerName, setPlayerName] = useState("");
   const [repositoryId, setRepositoryId] = useState("");
   const [directories, setDirectories] = useState([]);
-  const [prevPath, setPrevPath] = useState("");
-  const [currentPath, setPath] = useState("gitguesser");
+  const [pathHistory, setPathHistory] = useState([]);
+  const [currentPath, setCurrentPath] = useState("gitguesser");
   const [answer, setAnswer] = useState(null);
+  const [answerSubmitted, setAnswerSubmitted] = useState(false);
 
   const handleClickDirectory = (directoryId, repositoryId, directoryName) => {
     const options = {
@@ -36,8 +38,14 @@ function Game() {
       .then((directory) => {
         const { subdirectories } = directory;
         setDirectories(subdirectories);
-        setPrevPath(currentPath);
-        setPath((prevPath) => `${prevPath}/${directoryName}`);
+        setPathHistory((prevPathHistory) => [
+          ...prevPathHistory,
+          {
+            path: currentPath,
+            directories: directories,
+          },
+        ]);
+        setCurrentPath((prevPath) => `${prevPath}/${directoryName}`);
       })
       .catch((e) => {
         const message = "Error occurred: " + e.message;
@@ -114,45 +122,77 @@ function Game() {
       fetch(`${BACKEND_URL}/game/${gameId}`, options)
         .then((response) => {
           if (response.ok) {
+            setAnswerSubmitted(true);
             console.log("Submitted successfully");
           } else {
             throw new Error("Failed");
           }
         })
         .catch((error) => {
-          console.log("Error occured:", error.message);
+          console.log("Error occurred:", error.message);
         });
+    }
+  };
+
+  const handleReturn = () => {
+    if (pathHistory.length > 0) {
+      const previousPathEntry = pathHistory[pathHistory.length - 1];
+      setDirectories(previousPathEntry.directories);
+      setCurrentPath(previousPathEntry.path);
+      setPathHistory((prevPathHistory) =>
+        prevPathHistory.slice(0, prevPathHistory.length - 1)
+      );
     }
   };
 
   return (
     <>
-      <h1>gitguesser</h1>
-      Player: {playerName}
-      <br />
-      Current path: {currentPath}
-      <h2>Directories:</h2>
-      <ul>
-        {directories.map((directory) => (
-          <li key={directory.id}>
-            <button
-              onClick={() =>
-                handleClickDirectory(directory.id, repositoryId, directory.name)
-              }
-            >
-              {directory.name}
-            </button>
-            <button onClick={() => handleClickChoose(directory.name)}>
-              Choose
-            </button>
-          </li>
-        ))}
-      </ul>
-      {answer && <div>Chosen directory: {answer}</div>}
-      <button type="submit" onClick={() => handleSubmit(answer)}>
-        Submit
-      </button>
-      {error && <div>{error}</div>}
+      <h1 className="title">gitguesser</h1>
+      <div className="form">
+        <div className="info">
+          Player: {playerName}
+          <br />
+          Current path: {currentPath}
+        </div>
+        <h2 className="directories">Directories:</h2>
+        <button className="backButton" onClick={handleReturn}>
+          Back
+        </button>
+        <ul>
+          {directories.map((directory) => (
+            <li key={directory.id}>
+              <button
+                className="buttonDir"
+                onClick={() =>
+                  handleClickDirectory(
+                    directory.id,
+                    repositoryId,
+                    directory.name
+                  )
+                }
+              >
+                {directory.name}
+              </button>
+              <button
+                className="buttonChoose"
+                onClick={() => handleClickChoose(directory.name)}
+              >
+                Choose
+              </button>
+            </li>
+          ))}
+        </ul>
+        {answer && <div className="chosenDir">Chosen directory: {answer}</div>}
+        <button
+          type="submit"
+          className="buttonSubmit"
+          onClick={() => handleSubmit(answer)}
+        >
+          Submit
+        </button>
+        {answerSubmitted && <>Answer submitted</>}
+        {error && <div>{error}</div>}
+      </div>
     </>
   );
 }
