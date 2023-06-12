@@ -16,7 +16,9 @@ body {
 
 .form input {
   margin-bottom: 40px;
-  font-size: larger;
+  margin-top:25px;
+  font-size: 17px;
+  padding: 10px;
   border-radius: 10px;
 }
 
@@ -30,4 +32,5 @@ body {
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
+  border-radius: 6px;
 }

@@ -5,6 +5,14 @@
   font-size: medium;
   font-family: "Courier New", Courier, monospace;
   cursor: pointer;
+  padding: 10px 20px; 
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s; 
+}
+
+.buttonDir:hover {
+  background-color: rgb(50, 50, 50);
+  color: #fff; 
 }
 
 .buttonChoose {
@@ -70,6 +78,3 @@
   font-family: "Courier New", Courier, monospace;
 }
 
-.buttonDir:hover {
-  background-color: rgb(50, 50, 50);
-}
