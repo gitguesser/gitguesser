@@ -28,6 +28,12 @@
   width: 100px;
   height: 30px;
   cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.buttonChoose:hover {
+  background-color: rgb(123, 179, 224);
+  color: #fff;
 }
 
 .chosenDir {
@@ -49,6 +55,12 @@
   width: 140px;
   height: 50px;
   cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.buttonSubmit:hover {
+  background-color: rgb(191, 129, 164);
+  color: #fff;
 }
 
 .directories {
@@ -69,6 +81,16 @@
   width: 120px;
   height: 40px;
   cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.backButton:hover {
+  background-color: rgb(65, 142, 155);
+  color: #fff;
+}
+
+.hidden {
+  display: none;
 }
 
 .info {
