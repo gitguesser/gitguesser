@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../config";
+// import datetime from datetime;
 import "./Game.css";
 
 function Game() {
@@ -11,9 +12,10 @@ function Game() {
   const [repositoryId, setRepositoryId] = useState("");
   const [directories, setDirectories] = useState([]);
   const [pathHistory, setPathHistory] = useState([]);
-  const [currentPath, setCurrentPath] = useState("gitguesser");
+  const [currentPath, setCurrentPath] = useState("");
   const [answer, setAnswer] = useState(null);
   const [answerSubmitted, setAnswerSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   const handleClickDirectory = (directoryId, repositoryId, directoryName) => {
     const options = {
@@ -124,6 +126,8 @@ function Game() {
           if (response.ok) {
             setAnswerSubmitted(true);
             console.log("Submitted successfully");
+            console.log(answer);
+            navigate("/results", { state: { gameId } });
           } else {
             throw new Error("Failed");
           }
@@ -154,10 +158,13 @@ function Game() {
           <br />
           Current path: {currentPath}
         </div>
-        <h2 className="directories">Directories:</h2>
-        <button className="backButton" onClick={handleReturn}>
+        <button
+          className={`backButton ${currentPath === "" ? "hidden" : ""}`}
+          onClick={handleReturn}
+        >
           Back
         </button>
+
         <ul>
           {directories.map((directory) => (
             <li key={directory.id}>
@@ -186,6 +193,7 @@ function Game() {
         <button
           type="submit"
           className="buttonSubmit"
+          disabled={answer === null}
           onClick={() => handleSubmit(answer)}
         >
           Submit
