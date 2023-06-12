@@ -79,3 +79,4 @@ async def give_answer(*, db: AsyncSession, game_id: int, answer: str) -> None:
             dict(score=score, end_time=datetime.datetime.utcnow(), player_answer=answer)
         )
     )
+    await db.commit()
