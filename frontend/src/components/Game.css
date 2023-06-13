@@ -1,4 +1,5 @@
 .buttonDir {
+  margin-bottom: 2vw;
   background-color: rgb(0, 0, 0);
   color: white;
   border: none;
@@ -16,8 +17,9 @@
 }
 
 .buttonChoose {
-  margin-left: 5vw;
-  margin-bottom: 2vw;
+  margin-left: 25rem;
+  margin-top: -6vw;
+  margin-bottom: 7vw;
   background-color: rgb(33, 116, 184);
   border: none;
   border-radius: 4px;
@@ -25,8 +27,8 @@
   color: white;
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
-  width: 100px;
-  height: 30px;
+  width: 130px;
+  height: 60px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
 }
@@ -44,6 +46,7 @@
 }
 
 .buttonSubmit {
+  margin-top: 10vw;
   margin-bottom: 2vw;
   background-color: rgb(120, 1, 68);
   border: none;
@@ -69,7 +72,7 @@
 }
 
 .backButton {
-  margin-bottom: 1.5vw;
+  margin-top: 9vw;
   background-color: rgb(1, 108, 120);
   margin-right: 35vw;
   border: none;
@@ -94,6 +97,7 @@
 }
 
 .info {
+  margin-bottom: 12vw;
   font-size: large;
   margin-top: 2vw;
   color: rgb(217, 181, 251);
@@ -103,7 +107,7 @@
 .fileName {
   font-size: large;
   font-weight: bolder;
-  margin-bottom: 1.5vw;
+  margin-bottom: 2vw;
   color: rgb(180, 160, 9);
   font-family: "Courier New", Courier, monospace;
 }

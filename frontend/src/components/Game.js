@@ -106,8 +106,14 @@ function Game() {
   }, [gameId]);
 
   const handleClickChoose = (directoryName) => {
-    console.log(`Chose directory: ${directoryName}`);
-    setAnswer(directoryName);
+    console.log(`Chosen directory: ${directoryName}`);
+    if (currentPath == "") {
+      setAnswer("Chosen root directory");
+    } else {
+      const pathSegments = currentPath.split("/");
+      const lastSegment = pathSegments[pathSegments.length - 1];
+      setAnswer(lastSegment);
+    }
   };
 
   const handleSubmit = (answer) => {
@@ -167,6 +173,10 @@ function Game() {
           Back
         </button>
 
+        <button className="buttonChoose" onClick={() => handleClickChoose()}>
+          Choose
+        </button>
+
         <ul>
           {directories.map((directory) => (
             <li key={directory.id}>
@@ -181,12 +191,6 @@ function Game() {
                 }
               >
                 {directory.name}
-              </button>
-              <button
-                className="buttonChoose"
-                onClick={() => handleClickChoose(directory.name)}
-              >
-                Choose
               </button>
             </li>
           ))}
