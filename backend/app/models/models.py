@@ -17,6 +17,7 @@ class Game(Base):
     correct_answer = Column(String, nullable=False)
     player_answer = Column(String)
     score = Column(Integer)
+    file_name = Column(String)
 
     repository = relationship("Repository", back_populates="games")
 
