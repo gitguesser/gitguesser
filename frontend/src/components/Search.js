@@ -58,49 +58,51 @@ const Search = () => {
   };
 
   return (
-    <>
-      <div className="search-label">
-        Enter a keyword (you can also add something like "language:python" in
-        the end)
+    <span className="main">
+      <div>
+        <h1>Search repositories</h1>
+        <div className="search-label">
+          Enter a keyword (you can also add something like "language:python"):
+        </div>
+        <input
+          className="search-input"
+          type="text"
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+        />
+        <br />
+        <br />
+        <button className="search-button" onClick={handleSearch}>
+          Search
+        </button>
+        <button className="reroll-button" onClick={handleReroll}>
+          Reroll
+        </button>
+        <button className="home-button" onClick={() => navigate("/")}>
+          Home
+        </button>
+        <br />
+        <br />
+        {loading && <div>Loading...</div>}
+        {!loading && error === null && (
+          <ul className="repo-list">
+            {repositories.map((repo, id) => (
+              <li key={id} className="repo-item">
+                <button
+                  className="select-button"
+                  onClick={() => handleRepoClick(repo)}
+                >
+                  {repo.owner}/{repo.name}
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+        {!loading && error !== null && (
+          <div className="error-message">{error}</div>
+        )}
       </div>
-      <input
-        className="search-input"
-        type="text"
-        value={keyword}
-        onChange={(e) => setKeyword(e.target.value)}
-      />
-      <br />
-      <br />
-      <button className="search-button" onClick={handleSearch}>
-        Search
-      </button>
-      <button className="reroll-button" onClick={handleReroll}>
-        Reroll
-      </button>
-      <button className="home-button" onClick={() => navigate("/")}>
-        Home
-      </button>
-      <br />
-      <br />
-      {loading && <div>Loading...</div>}
-      {!loading && error === null && (
-        <ul className="repo-list">
-          {repositories.map((repo, id) => (
-            <li key={id} className="repo-item">
-              <button
-                className="select-button"
-                onClick={() => handleRepoClick(repo)}
-              >
-                {repo.owner}/{repo.name}
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-      {!loading && error !== null && (
-        <div className="error-message">{error}</div>
-      )}
-    </>
+    </span>
   );
 };
 
