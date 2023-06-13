@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../config";
-// import datetime from datetime;
 import "./Game.css";
 
 function Game() {
@@ -13,6 +12,7 @@ function Game() {
   const [directories, setDirectories] = useState([]);
   const [pathHistory, setPathHistory] = useState([]);
   const [currentPath, setCurrentPath] = useState("");
+  const [fileName, setFileName] = useState("");
   const [answer, setAnswer] = useState(null);
   const [answerSubmitted, setAnswerSubmitted] = useState(false);
   const navigate = useNavigate();
@@ -74,9 +74,10 @@ function Game() {
         });
       })
       .then((game) => {
-        const { player_name, repository_id } = game;
+        const { player_name, repository_id, file_name } = game;
         setPlayerName(player_name);
         setRepositoryId(repository_id);
+        setFileName(file_name);
 
         fetch(`${BACKEND_URL}/repository/${repository_id}/tree`, options)
           .then((response) => {
@@ -153,6 +154,9 @@ function Game() {
     <>
       <h1 className="title">gitguesser</h1>
       <div className="form">
+        <div className="fileName">
+          Guess location of file : {fileName}
+        </div>
         <div className="info">
           Player: {playerName}
           <br />

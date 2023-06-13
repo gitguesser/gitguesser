@@ -1,0 +1,109 @@
+.buttonDir {
+  background-color: rgb(0, 0, 0);
+  color: white;
+  border: none;
+  font-size: medium;
+  font-family: "Courier New", Courier, monospace;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.buttonDir:hover {
+  background-color: rgb(50, 50, 50);
+  color: #fff;
+}
+
+.buttonChoose {
+  margin-left: 5vw;
+  margin-bottom: 2vw;
+  background-color: rgb(33, 116, 184);
+  border: none;
+  border-radius: 4px;
+  font-size: medium;
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  width: 100px;
+  height: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.buttonChoose:hover {
+  background-color: rgb(123, 179, 224);
+  color: #fff;
+}
+
+.chosenDir {
+  margin-top: 2.5vw;
+  margin-bottom: 3vw;
+  font-weight: bold;
+  font-size: larger;
+}
+
+.buttonSubmit {
+  margin-bottom: 2vw;
+  background-color: rgb(120, 1, 68);
+  border: none;
+  border-radius: 4px;
+  font-size: medium;
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  width: 140px;
+  height: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.buttonSubmit:hover {
+  background-color: rgb(191, 129, 164);
+  color: #fff;
+}
+
+.directories {
+  margin-top: 2vw;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.backButton {
+  margin-bottom: 1.5vw;
+  background-color: rgb(1, 108, 120);
+  margin-right: 35vw;
+  border: none;
+  border-radius: 4px;
+  font-size: medium;
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  width: 120px;
+  height: 40px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.backButton:hover {
+  background-color: rgb(65, 142, 155);
+  color: #fff;
+}
+
+.hidden {
+  display: none;
+}
+
+.info {
+  font-size: large;
+  margin-top: 2vw;
+  color: rgb(217, 181, 251);
+  font-family: "Courier New", Courier, monospace;
+}
+
+.fileName {
+  font-size: large;
+  font-weight: bolder;
+  margin-bottom: 1.5vw;
+  color: rgb(180, 160, 9);
+  font-family: "Courier New", Courier, monospace;
+}
