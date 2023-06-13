@@ -166,16 +166,18 @@ function Game() {
           <br />
           Current path: {currentPath}
         </div>
-        <button
-          className={`backButton ${currentPath === "" ? "hidden" : ""}`}
-          onClick={handleReturn}
-        >
-          Back
-        </button>
+        <div className="buttonContainer">
+          <button
+            className={`backButton ${currentPath === "" ? "hidden" : ""}`}
+            onClick={handleReturn}
+          >
+            Back
+          </button>
 
-        <button className="buttonChoose" onClick={() => handleClickChoose()}>
-          Choose
-        </button>
+          <button className="buttonChoose" onClick={() => handleClickChoose()}>
+            Choose
+          </button>
+        </div>
 
         <ul>
           {directories.map((directory) => (

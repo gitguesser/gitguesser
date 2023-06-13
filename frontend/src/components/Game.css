@@ -1,5 +1,5 @@
 .buttonDir {
-  margin-bottom: 2vw;
+  margin-bottom: 1vw;
   background-color: rgb(0, 0, 0);
   color: white;
   border: none;
@@ -17,9 +17,7 @@
 }
 
 .buttonChoose {
-  margin-left: 25rem;
-  margin-top: -6vw;
-  margin-bottom: 7vw;
+  margin-bottom: 3vw;
   background-color: rgb(33, 116, 184);
   border: none;
   border-radius: 4px;
@@ -39,14 +37,14 @@
 }
 
 .chosenDir {
-  margin-top: 2.5vw;
-  margin-bottom: 3vw;
+  margin-top: 2vw;
+  margin-bottom: 2vw;
   font-weight: bold;
   font-size: larger;
 }
 
 .buttonSubmit {
-  margin-top: 10vw;
+  margin-top: 3vw;
   margin-bottom: 2vw;
   background-color: rgb(120, 1, 68);
   border: none;
@@ -72,7 +70,6 @@
 }
 
 .backButton {
-  margin-top: 9vw;
   background-color: rgb(1, 108, 120);
   margin-right: 35vw;
   border: none;
@@ -92,14 +89,18 @@
   color: #fff;
 }
 
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
 .hidden {
   display: none;
 }
 
 .info {
-  margin-bottom: 12vw;
+  margin-bottom: 3vw;
   font-size: large;
-  margin-top: 2vw;
   color: rgb(217, 181, 251);
   font-family: "Courier New", Courier, monospace;
 }
