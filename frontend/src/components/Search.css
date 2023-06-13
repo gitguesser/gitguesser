@@ -1,0 +1,62 @@
+body {
+  background-color: black;
+  color: white;
+}
+
+.search-label {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.search-input {
+  width: 300px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.search-button,
+.reroll-button,
+.select-button,
+.home-button {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  background-color: #4caf50;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.home-button {
+  background-color: #ff9800;
+}
+
+.select-button {
+  background-color: #54aff0;
+}
+
+.repo-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.repo-item {
+  margin-bottom: 10px;
+}
+
+.repo-owner {
+  font-weight: bold;
+}
+
+.repo-name {
+  margin-right: 5px;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
