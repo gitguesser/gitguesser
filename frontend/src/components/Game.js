@@ -107,7 +107,7 @@ function Game() {
 
   const handleClickChoose = (directoryName) => {
     console.log(`Chosen directory: ${directoryName}`);
-    if (currentPath == "") {
+    if (currentPath === "") {
       setAnswer("Chosen root directory");
     } else {
       const pathSegments = currentPath.split("/");
