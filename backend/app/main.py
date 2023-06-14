@@ -1,6 +1,6 @@
 from app.config import settings
 from app.database import init_models
-from app.routers import game, repository
+from app.routers import game, repository, search
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -20,6 +20,7 @@ app.add_middleware(
 
 app.include_router(game.router)
 app.include_router(repository.router)
+app.include_router(search.router)
 
 
 @app.on_event("startup")
