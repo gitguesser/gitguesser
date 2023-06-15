@@ -1,15 +1,18 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { BACKEND_URL } from "../config";
+import "./Home.css";
 
 function Home() {
-  const [playerName, setPlayerName] = useState("");
-  const [name, setName] = useState("");
-  const [owner, setOwner] = useState("");
-  const [branch, setBranch] = useState("main");
-  const [error, setError] = useState(null);
-
   const navigate = useNavigate();
+  const location = useLocation();
+  const state = location.state || {};
+
+  const [playerName, setPlayerName] = useState("");
+  const [name, setName] = useState(state.repo_name || "");
+  const [owner, setOwner] = useState(state.repo_owner || "");
+  const [branch, setBranch] = useState(state.repo_branch || "main");
+  const [error, setError] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -55,9 +58,9 @@ function Home() {
   ];
   return (
     <>
-      <h1>gitguesser</h1>
+      <h1 className="title">gitguesser</h1>
       <br />
-      <form onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         {inputs.map(({ label, value, onChange }, index) => (
           <div key={index}>
             <div>
@@ -75,8 +78,12 @@ function Home() {
           </div>
         ))}
         <br />
-        <button type="submit">Start game</button>
+        <button className="startButton" type="submit">
+          Start game
+        </button>
       </form>
+      <br />
+      <button onClick={() => navigate("search")}>Search repositories</button>
       {error !== null && <div>{error}</div>}
     </>
   );

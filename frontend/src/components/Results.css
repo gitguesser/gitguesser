@@ -1,0 +1,68 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.title {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 2rem;
+  margin-bottom: 5rem;
+}
+
+.repo {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1.2rem;
+  margin-bottom: 2.5rem;
+  margin-top: 2.5rem;
+}
+
+.answer {
+  font-family: "Courier New", Courier, monospace;
+  margin-bottom: 2.5rem;
+  margin-top: 2.5rem;
+}
+
+.time {
+  font-family: "Courier New", Courier, monospace;
+  margin-bottom: 2.5rem;
+  margin-top: 2.5rem;
+}
+
+.score {
+  font-family: "Courier New", Courier, monospace;
+  margin-bottom: 2.5rem;
+  margin-top: 2.5rem;
+}
+
+.buttonOK {
+  margin-left: 10rem;
+  margin-top: 3rem;
+  padding: 1rem 4rem;
+  background-color: rgb(33, 116, 184);
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.buttonOK:hover {
+  background-color: rgb(123, 179, 224);
+  color: #fff;
+}
+
+.loading {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+}
+
+.error {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  color: red;
+}
