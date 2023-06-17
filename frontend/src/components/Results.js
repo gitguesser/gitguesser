@@ -84,10 +84,14 @@ function Results() {
             repo: {repository.owner}/{repository.name}/{repository.branch}
           </div>
           <div className="answer">your answer: {gameResults.player_answer}</div>
-          <div className="answer">correct answer: {gameResults.correct_answer}</div>
+          <div className="answer">
+            correct answer: {gameResults.correct_answer}
+          </div>
           <div className="time">time: {formatDuration(duration)}</div>
           <div className="score">score: {gameResults.score}</div>
-          <button className="buttonOK" onClick={returnHome}>OK</button>
+          <button className="buttonOK" onClick={returnHome}>
+            OK
+          </button>
         </div>
       )}
     </>
