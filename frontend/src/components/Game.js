@@ -13,6 +13,7 @@ function Game() {
   const [pathHistory, setPathHistory] = useState([]);
   const [currentPath, setCurrentPath] = useState("");
   const [fileName, setFileName] = useState("");
+  const [showAnswer, setShowAnswer] = useState("");
   const [answer, setAnswer] = useState(null);
   const [answerSubmitted, setAnswerSubmitted] = useState(false);
   const navigate = useNavigate();
@@ -106,13 +107,12 @@ function Game() {
   }, [gameId]);
 
   const handleClickChoose = (directoryName) => {
-    console.log(`Chosen directory: ${directoryName}`);
     if (currentPath === "") {
-      setAnswer("Chosen root directory");
+      setShowAnswer("root directory");
+      setAnswer(" ");
     } else {
-      const pathSegments = currentPath.split("/");
-      const lastSegment = pathSegments[pathSegments.length - 1];
-      setAnswer(lastSegment);
+      setShowAnswer(currentPath);
+      setAnswer(currentPath);
     }
   };
 
@@ -166,18 +166,9 @@ function Game() {
           <br />
           Current path: {currentPath}
         </div>
-        <div className="buttonContainer">
-          <button
-            className={`backButton ${currentPath === "" ? "hidden" : ""}`}
-            onClick={handleReturn}
-          >
-            Back
-          </button>
-
-          <button className="buttonChoose" onClick={() => handleClickChoose()}>
-            Choose
-          </button>
-        </div>
+        <button className="buttonChoose" onClick={() => handleClickChoose()}>
+          Choose
+        </button>
 
         <ul>
           {directories.map((directory) => (
@@ -197,7 +188,15 @@ function Game() {
             </li>
           ))}
         </ul>
-        {answer && <div className="chosenDir">Chosen directory: {answer}</div>}
+        {showAnswer && (
+          <div className="chosenDir">Chosen directory: {showAnswer}</div>
+        )}
+        <button
+          className={`backButton ${currentPath === "" ? "hidden" : ""}`}
+          onClick={handleReturn}
+        >
+          Back
+        </button>
         <button
           type="submit"
           className="buttonSubmit"

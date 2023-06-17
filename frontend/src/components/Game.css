@@ -18,6 +18,8 @@
 
 .buttonChoose {
   margin-bottom: 3vw;
+
+  right: 40%;
   background-color: rgb(33, 116, 184);
   border: none;
   border-radius: 4px;
@@ -44,7 +46,7 @@
 }
 
 .buttonSubmit {
-  margin-top: 3vw;
+  margin-top: 5vw;
   margin-bottom: 2vw;
   background-color: rgb(120, 1, 68);
   border: none;
@@ -71,7 +73,6 @@
 
 .backButton {
   background-color: rgb(1, 108, 120);
-  margin-right: 35vw;
   border: none;
   border-radius: 4px;
   font-size: medium;
@@ -90,8 +91,8 @@
 }
 
 .buttonContainer {
-  display: flex;
-  justify-content: space-between;
+  align-items: center;
+  justify-items: center;
 }
 
 .hidden {
