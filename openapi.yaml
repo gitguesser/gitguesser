@@ -1,0 +1,454 @@
+components:
+  schemas:
+    Directory:
+      properties:
+        id:
+          title: Id
+          type: string
+        name:
+          title: Name
+          type: string
+        subdirectories:
+          items:
+            $ref: '#/components/schemas/DirectoryInfo'
+          title: Subdirectories
+          type: array
+      required:
+      - id
+      - name
+      - subdirectories
+      title: Directory
+      type: object
+    DirectoryInfo:
+      properties:
+        id:
+          title: Id
+          type: string
+        name:
+          title: Name
+          type: string
+      required:
+      - id
+      - name
+      title: DirectoryInfo
+      type: object
+    GameInfo:
+      properties:
+        id:
+          title: Id
+          type: integer
+        player_name:
+          title: Player Name
+          type: string
+        repository_id:
+          title: Repository Id
+          type: integer
+        start_time:
+          format: date-time
+          title: Start Time
+          type: string
+      required:
+      - id
+      - repository_id
+      - player_name
+      - start_time
+      title: GameInfo
+      type: object
+    GameResults:
+      properties:
+        correct_answer:
+          title: Correct Answer
+          type: string
+        end_time:
+          format: date-time
+          title: End Time
+          type: string
+        id:
+          title: Id
+          type: integer
+        player_answer:
+          title: Player Answer
+          type: string
+        player_name:
+          title: Player Name
+          type: string
+        repository_id:
+          title: Repository Id
+          type: integer
+        score:
+          title: Score
+          type: integer
+        start_time:
+          format: date-time
+          title: Start Time
+          type: string
+      required:
+      - id
+      - repository_id
+      - player_name
+      - start_time
+      - end_time
+      - score
+      - player_answer
+      - correct_answer
+      title: GameResults
+      type: object
+    GameStartConfig:
+      properties:
+        player_name:
+          title: Player Name
+          type: string
+        repo_branch:
+          title: Repo Branch
+          type: string
+        repo_name:
+          title: Repo Name
+          type: string
+        repo_owner:
+          title: Repo Owner
+          type: string
+      required:
+      - player_name
+      - repo_name
+      - repo_owner
+      - repo_branch
+      title: GameStartConfig
+      type: object
+    GameWithId:
+      properties:
+        game_id:
+          title: Game Id
+          type: integer
+      required:
+      - game_id
+      title: GameWithId
+      type: object
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          title: Detail
+          type: array
+      title: HTTPValidationError
+      type: object
+    PlayerAnswer:
+      properties:
+        answer:
+          title: Answer
+          type: string
+      required:
+      - answer
+      title: PlayerAnswer
+      type: object
+    Repositories:
+      properties:
+        repos:
+          items:
+            $ref: '#/components/schemas/app__schemas__search__Repository'
+          title: Repos
+          type: array
+      required:
+      - repos
+      title: Repositories
+      type: object
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          title: Location
+          type: array
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+      type: object
+    app__schemas__repository__Repository:
+      properties:
+        branch:
+          title: Branch
+          type: string
+        id:
+          title: Id
+          type: integer
+        name:
+          title: Name
+          type: string
+        owner:
+          title: Owner
+          type: string
+      required:
+      - id
+      - name
+      - owner
+      - branch
+      title: Repository
+      type: object
+    app__schemas__search__Repository:
+      properties:
+        branch:
+          title: Branch
+          type: string
+        name:
+          title: Name
+          type: string
+        owner:
+          title: Owner
+          type: string
+      required:
+      - name
+      - owner
+      - branch
+      title: Repository
+      type: object
+info:
+  title: FastAPI
+  version: 0.1.0
+openapi: 3.0.2
+paths:
+  /:
+    get:
+      operationId: root__get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+      summary: Root
+  /game/:
+    post:
+      description: Starts a new game.
+      operationId: start_game_game__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GameStartConfig'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameWithId'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Start Game
+      tags:
+      - game
+  /game/{id}:
+    get:
+      description: Retrieves information about a game with given id.
+      operationId: get_game_info_game__id__get
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          title: Id
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameInfo'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get Game Info
+      tags:
+      - game
+    post:
+      description: Sends player answer for a game with given id.
+      operationId: send_answer_game__id__post
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          title: Id
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlayerAnswer'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Send Answer
+      tags:
+      - game
+  /game/{id}/results:
+    get:
+      description: Retrieves results of finished game with given id.
+      operationId: get_game_results_game__id__results_get
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          title: Id
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameResults'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get Game Results
+      tags:
+      - game
+  /repository/{id}:
+    get:
+      description: Returns information about a repository with given id.
+      operationId: get_repository_repository__id__get
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          title: Id
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/app__schemas__repository__Repository'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get Repository
+      tags:
+      - repository
+  /repository/{id}/tree:
+    get:
+      description: Returns root directory of the repository with given id.
+      operationId: get_root_directory_repository__id__tree_get
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          title: Id
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Directory'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get Root Directory
+      tags:
+      - repository
+  /repository/{id}/tree/{directory_id}:
+    get:
+      description: Returns directory with given id that belongs to the repository.
+      operationId: get_directory_repository__id__tree__directory_id__get
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          title: Id
+          type: integer
+      - in: path
+        name: directory_id
+        required: true
+        schema:
+          title: Directory Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Directory'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get Directory
+      tags:
+      - repository
+  /search/:
+    get:
+      description: Gets repositories from GitHub.
+      operationId: search_repos_search__get
+      parameters:
+      - in: query
+        name: query
+        required: false
+        schema:
+          default: ''
+          title: Query
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Repositories'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Search Repos
+      tags:
+      - search
