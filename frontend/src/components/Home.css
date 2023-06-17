@@ -34,3 +34,25 @@ body {
   cursor: pointer;
   border-radius: 6px;
 }
+
+.searchRepoButton {
+  margin-left: 25vw;
+  margin-bottom: 2vw;
+  right: 40%;
+  background-color: rgb(33, 116, 184);
+  border: none;
+  border-radius: 4px;
+  font-size: medium;
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  width: 130px;
+  height: 60px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.searchRepoButton:hover {
+  background-color: rgb(50, 50, 50);
+  color: #fff;
+}
