@@ -1,0 +1,84 @@
+name: Generate Swagger Docs
+
+on:
+  push:
+    branches:
+      - main
+      
+permissions:
+  contents: write
+
+jobs:
+  generate_docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Clone repository
+        uses: actions/checkout@v3
+        
+      - name: Create docs directory
+        run: mkdir -p docs
+        
+      - name: Add packages
+        run: echo "PyYAML" >> backend/requirements.txt
+        
+      - name: Create .env file
+        run: echo "${{ vars.ENV_FILE }}" > .env
+
+      - name: Build and run containers
+        run: docker-compose up -d --build
+        
+      - name: Generate Swagger Docs
+        run: |
+          docker-compose exec -T backend python -c '
+          import yaml
+          from app.main import app
+
+          openapi_schema = app.openapi()
+
+          with open("openapi.yaml", "w") as file:
+              yaml.dump(openapi_schema, file)
+          '
+          mv backend/openapi.yaml docs/
+        
+      - name: Stop containers
+        run: docker-compose down
+          
+      - name: Create Swagger index.html
+        run: |
+          echo '
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+              <meta charset="utf-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <title>gitguesser docs</title>
+              <link rel="icon" type="image/png" href="https://unpkg.com/swagger-ui-dist@5.0.0/favicon-32x32.png" sizes="32x32" />
+              <link rel="icon" type="image/png" href="https://unpkg.com/swagger-ui-dist@5.0.0/favicon-16x16.png" sizes="16x16" />
+              <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5.0.0/swagger-ui.css" />
+            </head>
+            <body>
+            <div id="swagger-ui"></div>
+            <script src="https://unpkg.com/swagger-ui-dist@5.0.0/swagger-ui-bundle.js" crossorigin></script>
+            <script>
+              window.onload = () => {
+                window.ui = SwaggerUIBundle({
+                  url: "openapi.yaml",
+                  deepLinking: "true",
+                  dom_id: "#swagger-ui",
+                });
+              };
+            </script>
+            </body>
+            </html>
+          ' > docs/index.html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs
