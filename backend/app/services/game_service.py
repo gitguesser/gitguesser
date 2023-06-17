@@ -24,6 +24,7 @@ async def start_game(*, db: AsyncSession, game_config: GameStartConfig) -> int:
         start_time=datetime.datetime.utcnow(),
         player_name=game_config.player_name,
         correct_answer=correct_answer,
+        file_name=correct_answer.split("/")[-1],
     )
     db.add(game)
     await db.commit()
@@ -79,3 +80,4 @@ async def give_answer(*, db: AsyncSession, game_id: int, answer: str) -> None:
             dict(score=score, end_time=datetime.datetime.utcnow(), player_answer=answer)
         )
     )
+    await db.commit()

@@ -19,6 +19,7 @@ class GameInfo(BaseModel):
     repository_id: int
     player_name: str
     start_time: datetime
+    file_name: str
 
     class Config:
         orm_mode = True

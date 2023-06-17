@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../config";
 import "./Game.css";
 
@@ -11,9 +11,12 @@ function Game() {
   const [repositoryId, setRepositoryId] = useState("");
   const [directories, setDirectories] = useState([]);
   const [pathHistory, setPathHistory] = useState([]);
-  const [currentPath, setCurrentPath] = useState("gitguesser");
+  const [currentPath, setCurrentPath] = useState("");
+  const [fileName, setFileName] = useState("");
+  const [showAnswer, setShowAnswer] = useState("");
   const [answer, setAnswer] = useState(null);
   const [answerSubmitted, setAnswerSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   const handleClickDirectory = (directoryId, repositoryId, directoryName) => {
     const options = {
@@ -72,9 +75,10 @@ function Game() {
         });
       })
       .then((game) => {
-        const { player_name, repository_id } = game;
+        const { player_name, repository_id, file_name } = game;
         setPlayerName(player_name);
         setRepositoryId(repository_id);
+        setFileName(file_name);
 
         fetch(`${BACKEND_URL}/repository/${repository_id}/tree`, options)
           .then((response) => {
@@ -103,8 +107,13 @@ function Game() {
   }, [gameId]);
 
   const handleClickChoose = (directoryName) => {
-    console.log(`Chose directory: ${directoryName}`);
-    setAnswer(directoryName);
+    if (currentPath === "") {
+      setShowAnswer("root directory");
+      setAnswer(" ");
+    } else {
+      setShowAnswer(currentPath);
+      setAnswer(currentPath);
+    }
   };
 
   const handleSubmit = (answer) => {
@@ -124,6 +133,8 @@ function Game() {
           if (response.ok) {
             setAnswerSubmitted(true);
             console.log("Submitted successfully");
+            console.log(answer);
+            navigate("/results", { state: { gameId } });
           } else {
             throw new Error("Failed");
           }
@@ -149,15 +160,16 @@ function Game() {
     <>
       <h1 className="title">gitguesser</h1>
       <div className="form">
+        <div className="fileName">Guess location of file : {fileName}</div>
         <div className="info">
           Player: {playerName}
           <br />
           Current path: {currentPath}
         </div>
-        <h2 className="directories">Directories:</h2>
-        <button className="backButton" onClick={handleReturn}>
-          Back
+        <button className="buttonChoose" onClick={() => handleClickChoose()}>
+          Choose
         </button>
+
         <ul>
           {directories.map((directory) => (
             <li key={directory.id}>
@@ -173,19 +185,22 @@ function Game() {
               >
                 {directory.name}
               </button>
-              <button
-                className="buttonChoose"
-                onClick={() => handleClickChoose(directory.name)}
-              >
-                Choose
-              </button>
             </li>
           ))}
         </ul>
-        {answer && <div className="chosenDir">Chosen directory: {answer}</div>}
+        {showAnswer && (
+          <div className="chosenDir">Chosen directory: {showAnswer}</div>
+        )}
+        <button
+          className={`backButton ${currentPath === "" ? "hidden" : ""}`}
+          onClick={handleReturn}
+        >
+          Back
+        </button>
         <button
           type="submit"
           className="buttonSubmit"
+          disabled={answer === null}
           onClick={() => handleSubmit(answer)}
         >
           Submit
