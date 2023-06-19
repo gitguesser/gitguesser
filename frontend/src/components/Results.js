@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../config";
+import "./Results.css";
 
 function Results() {
   const location = useLocation();
@@ -76,17 +77,21 @@ function Results() {
 
   return (
     <>
-      <h1>{gameResults.player_name}'s game results</h1>
+      <h1 className="title ">{gameResults.player_name}'s game results</h1>
       {gameResults && repository && (
-        <div>
-          <div>
+        <div className="container">
+          <div className="repo">
             repo: {repository.owner}/{repository.name}/{repository.branch}
           </div>
-          <div>your answer: {gameResults.player_answer}</div>
-          <div>correct answer: {gameResults.correct_answer}</div>
-          <div>time: {formatDuration(duration)}</div>
-          <div>score: {gameResults.score}</div>
-          <button onClick={returnHome}>OK</button>
+          <div className="answer">your answer: {gameResults.player_answer}</div>
+          <div className="answer">
+            correct answer: {gameResults.correct_answer}
+          </div>
+          <div className="time">time: {formatDuration(duration)}</div>
+          <div className="score">score: {gameResults.score}</div>
+          <button className="buttonOK" onClick={returnHome}>
+            OK
+          </button>
         </div>
       )}
     </>

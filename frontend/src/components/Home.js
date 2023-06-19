@@ -81,9 +81,12 @@ function Home() {
         <button className="startButton" type="submit">
           Start game
         </button>
+        <br />
+        <button className="searchRepoButton" onClick={() => navigate("search")}>
+          Search repositories
+        </button>
       </form>
       <br />
-      <button onClick={() => navigate("search")}>Search repositories</button>
       {error !== null && <div>{error}</div>}
     </>
   );
