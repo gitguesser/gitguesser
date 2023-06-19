@@ -33,6 +33,12 @@ body {
   font-size: 16px;
   cursor: pointer;
   border-radius: 6px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.startButton:hover {
+  background-color: #102710;
+  color: #fff;
 }
 
 .searchRepoButton {
@@ -51,6 +57,6 @@ body {
 }
 
 .searchRepoButton:hover {
-  background-color: rgb(50, 50, 50);
+  background-color: rgb(7, 22, 34);
   color: #fff;
 }
