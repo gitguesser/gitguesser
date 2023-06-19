@@ -60,9 +60,6 @@ function Home() {
     <>
       <h1 className="title">gitguesser</h1>
       <br />
-      <button className="searchRepoButton" onClick={() => navigate("search")}>
-        Search repositories
-      </button>
       <form className="form" onSubmit={handleSubmit}>
         {inputs.map(({ label, value, onChange }, index) => (
           <div key={index}>
@@ -83,6 +80,10 @@ function Home() {
         <br />
         <button className="startButton" type="submit">
           Start game
+        </button>
+        <br />
+        <button className="searchRepoButton" onClick={() => navigate("search")}>
+          Search repositories
         </button>
       </form>
       <br />

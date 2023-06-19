@@ -16,7 +16,7 @@ body {
 
 .form input {
   margin-bottom: 40px;
-  margin-top: 25px;
+  margin-top: 20px;
   font-size: 17px;
   padding: 10px;
   border-radius: 10px;
@@ -36,9 +36,9 @@ body {
 }
 
 .searchRepoButton {
-  margin-left: 25vw;
-  margin-bottom: 2vw;
-  right: 40%;
+  margin-left: 16%;
+  margin-top: 35px;
+  transform: translateX(-50%);
   background-color: rgb(33, 116, 184);
   border: none;
   border-radius: 4px;
@@ -46,7 +46,7 @@ body {
   color: white;
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
-  width: 130px;
+  width: 200px;
   height: 60px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
