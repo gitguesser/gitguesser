@@ -19,12 +19,12 @@ repos:
     -   id: autoflake
         args: [--remove-all-unused-imports, --recursive, --remove-unused-variables, --in-place]
 -   repo: https://github.com/pre-commit/mirrors-prettier
-    rev: '50c5478ed9e10bf360335449280cf2a67f4edb7a'  # version 2.7.1
+    rev: 'v3.0.0-alpha.9-for-vscode'  # version 2.7.1
     hooks:
     -   id: prettier
         types_or: [javascript, html, css, json]
 -   repo: https://github.com/pre-commit/mirrors-eslint
-    rev: 'aaf3076'  # Use the sha / tag you want to point at
+    rev: 'v8.43.0'  # Use the sha / tag you want to point at
     hooks:
     -   id: eslint
         additional_dependencies:
