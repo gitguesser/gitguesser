@@ -2,6 +2,11 @@
 
 [![Testing](https://github.com/gitguesser/gitguesser/actions/workflows/test.yml/badge.svg)](https://github.com/gitguesser/gitguesser/actions/workflows/test.yml)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/gitguesser/gitguesser/main.svg)](https://results.pre-commit.ci/latest/github/gitguesser/gitguesser/main)
+[![Generate docs](https://github.com/gitguesser/gitguesser/actions/workflows/docs.yml/badge.svg)](https://github.com/gitguesser/gitguesser/actions/workflows/docs.yml)
+[![Deploy pages](https://github.com/gitguesser/gitguesser/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/gitguesser/gitguesser/actions/workflows/pages/pages-build-deployment)
+
+## Docs
+The API docs are available [here](https://gitguesser.github.io/gitguesser/).
 
 ## Configuration
 
