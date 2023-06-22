@@ -34,6 +34,9 @@ components:
       type: object
     GameInfo:
       properties:
+        file_name:
+          title: File Name
+          type: string
         id:
           title: Id
           type: integer
@@ -52,6 +55,7 @@ components:
       - repository_id
       - player_name
       - start_time
+      - file_name
       title: GameInfo
       type: object
     GameResults:
@@ -62,6 +66,9 @@ components:
         end_time:
           format: date-time
           title: End Time
+          type: string
+        file_name:
+          title: File Name
           type: string
         id:
           title: Id
@@ -87,6 +94,7 @@ components:
       - repository_id
       - player_name
       - start_time
+      - file_name
       - end_time
       - score
       - player_answer
