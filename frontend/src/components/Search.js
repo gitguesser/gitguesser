@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../config";
 import "./Search.css";
 
+const COUNT = 10;
+
 const Search = () => {
   const [keyword, setKeyword] = useState("");
   const [allRepositories, setAllRepositories] = useState([]);
@@ -25,8 +27,7 @@ const Search = () => {
       })
       .then((json) => {
         setAllRepositories(json.repos);
-        const randomRepositories = getRandomRepositories(json.repos, 10);
-        setRepositories(randomRepositories);
+        setRepositories(json.repos.slice(0, COUNT));
         setLoading(false);
       })
       .catch((e) => {
@@ -48,13 +49,10 @@ const Search = () => {
   };
 
   const handleReroll = () => {
-    const randomRepositories = getRandomRepositories(allRepositories, 10);
-    setRepositories(randomRepositories);
-  };
-
-  const getRandomRepositories = (repos, count) => {
-    const shuffled = repos.sort(() => Math.random());
-    return shuffled.slice(0, count);
+    const newRepositories = allRepositories
+      .sort(() => Math.random() - 0.5)
+      .slice(0, COUNT);
+    setRepositories(newRepositories);
   };
 
   return (
