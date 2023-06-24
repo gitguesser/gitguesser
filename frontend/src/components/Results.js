@@ -72,7 +72,7 @@ function Results() {
   const formatDuration = (duration) => {
     const minutes = Math.floor(duration / 60);
     const seconds = Math.floor(duration % 60);
-    return `${minutes}:${seconds}`;
+    return seconds >= 10 ? `${minutes}:${seconds}` : `${minutes}:0${seconds}`;
   };
 
   return (
@@ -83,9 +83,11 @@ function Results() {
           <div className="repo">
             repo: {repository.owner}/{repository.name}/{repository.branch}
           </div>
-          <div className="answer">your answer: {gameResults.player_answer}</div>
           <div className="answer">
-            correct answer: {gameResults.correct_answer}
+            your answer: /{gameResults.player_answer}
+          </div>
+          <div className="answer">
+            correct answer: /{gameResults.correct_answer}
           </div>
           <div className="time">time: {formatDuration(duration)}</div>
           <div className="score">score: {gameResults.score}</div>
