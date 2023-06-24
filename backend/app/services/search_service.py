@@ -6,7 +6,7 @@ from fastapi import HTTPException, status
 
 async def search_repos(*, query: str) -> list[Repository]:
     """Finds repositories on Github."""
-    endpoint = f"https://api.github.com/search/repositories?q={query}&sort=stars&order=desc&per_page=100"
+    endpoint = f"https://api.github.com/search/repositories?q={query}&sort=stars&order=desc&per_page=50"
     auth = None
     if settings.github_username and settings.github_token:
         auth = (settings.github_username, settings.github_token)
