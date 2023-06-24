@@ -23,7 +23,7 @@ async def start_game(*, db: AsyncSession, game_config: GameStartConfig) -> int:
         repository_id=repo_id,
         start_time=datetime.datetime.utcnow(),
         player_name=game_config.player_name,
-        correct_answer=correct_answer,
+        correct_answer=correct_answer.rsplit("/", 1)[0],
         file_name=correct_answer.split("/")[-1],
     )
     db.add(game)

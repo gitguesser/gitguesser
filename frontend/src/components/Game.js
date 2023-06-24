@@ -11,7 +11,7 @@ function Game() {
   const [repositoryId, setRepositoryId] = useState("");
   const [directories, setDirectories] = useState([]);
   const [pathHistory, setPathHistory] = useState([]);
-  const [currentPath, setCurrentPath] = useState("");
+  const [currentPath, setCurrentPath] = useState("/");
   const [fileName, setFileName] = useState("");
   const [showAnswer, setShowAnswer] = useState("");
   const [answer, setAnswer] = useState(null);
@@ -48,7 +48,11 @@ function Game() {
             directories: directories,
           },
         ]);
-        setCurrentPath((prevPath) => `${prevPath}/${directoryName}`);
+        setCurrentPath((prevPath) =>
+          prevPath === "/"
+            ? `${prevPath}${directoryName}`
+            : `${prevPath}/${directoryName}`
+        );
       })
       .catch((e) => {
         const message = "Error occurred: " + e.message;
@@ -107,17 +111,12 @@ function Game() {
   }, [gameId]);
 
   const handleClickChoose = (directoryName) => {
-    if (currentPath === "") {
-      setShowAnswer("root directory");
-      setAnswer(" ");
-    } else {
-      setShowAnswer(currentPath);
-      setAnswer(currentPath);
-    }
+    setShowAnswer(currentPath);
+    setAnswer(currentPath.substring(1));
   };
 
   const handleSubmit = (answer) => {
-    if (answer) {
+    if (answer != null) {
       const options = {
         method: "POST",
         headers: {
