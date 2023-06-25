@@ -64,8 +64,8 @@ async def give_answer(*, db: AsyncSession, game_id: int, answer: str) -> None:
     if game.end_time is not None:
         return
 
-    correct_path = game.correct_answer.split("/")[:-1]
-    player_path = answer.split("/")[:-1]
+    correct_path = game.correct_answer.split("/") if game.correct_answer != "" else []
+    player_path = answer.split("/") if answer != "" and answer != " " else []
 
     min_len = min(len(correct_path), len(player_path))
     i = 0
