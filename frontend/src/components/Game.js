@@ -159,7 +159,7 @@ function Game() {
     <>
       <h1 className="title">gitguesser</h1>
       <div className="form">
-        <div className="fileName">Guess location of file : {fileName}</div>
+        <div className="fileName">Guess location of file: {fileName}</div>
         <div className="info">
           Player: {playerName}
           <br />
