@@ -32,18 +32,37 @@ body {
   font-size: 14px;
   border: none;
   border-radius: 4px;
-  background-color: #4caf50;
+  background-color: #429145;
   color: #fff;
   cursor: pointer;
   margin-right: 10px;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .home-button {
   background-color: #ff9800;
 }
 
+.home-button:hover {
+  background-color: #b26b01;
+}
+
 .select-button {
-  background-color: #54aff0;
+  background-color: rgb(33, 116, 184);
+}
+
+.select-button:hover {
+  background-color: rgb(8, 50, 85);
+}
+
+.search-button:hover,
+.reroll-button:hover {
+  background-color: #1e5720;
+}
+
+.search-button:disabled:hover,
+.reroll-button:disabled:hover {
+  background-color: #429145;
 }
 
 .repo-list {
