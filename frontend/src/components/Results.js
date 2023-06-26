@@ -36,7 +36,6 @@ function Results() {
             });
           })
           .then((json) => {
-            console.log(json);
             setRepository(json);
             setLoading(false);
           })
@@ -81,16 +80,25 @@ function Results() {
       {gameResults && repository && (
         <div className="container">
           <div className="repo">
-            repo: {repository.owner}/{repository.name}/{repository.branch}
+            <span className="text">repo: </span>
+            {repository.owner}/{repository.name} ({repository.branch})
           </div>
           <div className="answer">
-            your answer: /{gameResults.player_answer}
+            <span className="text">your answer: </span>/
+            {gameResults.player_answer}
           </div>
           <div className="answer">
-            correct answer: /{gameResults.correct_answer}
+            <span className="text">correct answer: </span>/
+            {gameResults.correct_answer}
           </div>
-          <div className="time">time: {formatDuration(duration)}</div>
-          <div className="score">score: {gameResults.score}</div>
+          <div className="time">
+            <span className="text">time: </span>
+            {formatDuration(duration)}
+          </div>
+          <div className="score">
+            <span className="text">score (lower is better): </span>
+            {gameResults.score}
+          </div>
           <button className="buttonOK" onClick={returnHome}>
             OK
           </button>

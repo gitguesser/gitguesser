@@ -9,31 +9,33 @@
   font-family: "Courier New", Courier, monospace;
   font-size: 2rem;
   margin-bottom: 5rem;
+  color: rgb(123, 179, 224);
 }
 
 .repo {
   font-family: "Courier New", Courier, monospace;
   font-size: 1.2rem;
-  margin-bottom: 2.5rem;
-  margin-top: 2.5rem;
+  margin-top: 3rem;
 }
 
 .answer {
   font-family: "Courier New", Courier, monospace;
-  margin-bottom: 2.5rem;
-  margin-top: 2.5rem;
+  margin-top: 3rem;
 }
 
 .time {
   font-family: "Courier New", Courier, monospace;
-  margin-bottom: 2.5rem;
-  margin-top: 2.5rem;
+  margin-top: 3rem;
 }
 
 .score {
   font-family: "Courier New", Courier, monospace;
   margin-bottom: 2.5rem;
-  margin-top: 2.5rem;
+  margin-top: 3rem;
+}
+
+.text {
+  color: rgb(47, 161, 255);
 }
 
 .buttonOK {

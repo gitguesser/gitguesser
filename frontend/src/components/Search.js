@@ -81,7 +81,7 @@ const Search = () => {
         </button>
         <br />
         <br />
-        {loading && <div>Loading...</div>}
+        {loading && <div className="loading">Loading...</div>}
         {!loading && error === null && (
           <ul className="repo-list">
             {repositories.map((repo, id) => (

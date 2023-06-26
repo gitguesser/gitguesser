@@ -26,7 +26,9 @@ body {
 .reroll-button,
 .select-button,
 .home-button {
-  padding: 8px 12px;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  padding: 9px 14px;
   font-size: 14px;
   border: none;
   border-radius: 4px;
@@ -65,4 +67,9 @@ body {
   color: red;
   font-weight: bold;
   margin-top: 10px;
+}
+
+.loading {
+  margin-top: 100px;
+  font-size: x-large;
 }
