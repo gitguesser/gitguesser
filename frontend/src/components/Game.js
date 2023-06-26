@@ -131,8 +131,6 @@ function Game() {
         .then((response) => {
           if (response.ok) {
             setAnswerSubmitted(true);
-            console.log("Submitted successfully");
-            console.log(answer);
             navigate("/results", { state: { gameId } });
           } else {
             throw new Error("Failed");
@@ -159,15 +157,38 @@ function Game() {
     <>
       <h1 className="title">gitguesser</h1>
       <div className="form">
-        <div className="fileName">Guess location of file : {fileName}</div>
+        <div className="fileName">
+          Guess location of file:{" "}
+          <span style={{ textDecorationLine: "underline" }}>{fileName}</span>
+        </div>
         <div className="info">
           Player: {playerName}
           <br />
           Current path: {currentPath}
+          <div className="chosenDir">
+            Chosen directory: {showAnswer ? <>{showAnswer}</> : <>none</>}
+          </div>
         </div>
-        <button className="buttonChoose" onClick={() => handleClickChoose()}>
-          Choose
-        </button>
+        <div>
+          <button
+            className="backButton"
+            disabled={currentPath === "/"}
+            onClick={handleReturn}
+          >
+            Back
+          </button>
+          <button className="buttonChoose" onClick={() => handleClickChoose()}>
+            Choose
+          </button>
+          <button
+            type="submit"
+            className="buttonSubmit"
+            disabled={answer === null}
+            onClick={() => handleSubmit(answer)}
+          >
+            Submit
+          </button>
+        </div>
 
         <ul>
           {directories.map((directory) => (
@@ -187,23 +208,6 @@ function Game() {
             </li>
           ))}
         </ul>
-        {showAnswer && (
-          <div className="chosenDir">Chosen directory: {showAnswer}</div>
-        )}
-        <button
-          className={`backButton ${currentPath === "" ? "hidden" : ""}`}
-          onClick={handleReturn}
-        >
-          Back
-        </button>
-        <button
-          type="submit"
-          className="buttonSubmit"
-          disabled={answer === null}
-          onClick={() => handleSubmit(answer)}
-        >
-          Submit
-        </button>
         {answerSubmitted && <>Answer submitted</>}
         {error && <div>{error}</div>}
       </div>

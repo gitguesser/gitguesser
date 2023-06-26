@@ -70,10 +70,18 @@ const Search = () => {
         />
         <br />
         <br />
-        <button className="search-button" onClick={handleSearch}>
+        <button
+          className="search-button"
+          onClick={handleSearch}
+          disabled={keyword === ""}
+        >
           Search
         </button>
-        <button className="reroll-button" onClick={handleReroll}>
+        <button
+          className="reroll-button"
+          onClick={handleReroll}
+          disabled={allRepositories.length === 0}
+        >
           Reroll
         </button>
         <button className="home-button" onClick={() => navigate("/")}>
@@ -81,7 +89,7 @@ const Search = () => {
         </button>
         <br />
         <br />
-        {loading && <div>Loading...</div>}
+        {loading && <div className="loading">Loading...</div>}
         {!loading && error === null && (
           <ul className="repo-list">
             {repositories.map((repo, id) => (

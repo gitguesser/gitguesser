@@ -12,6 +12,7 @@ body {
 .title {
   display: flex;
   justify-content: center;
+  color: rgb(123, 179, 224);
 }
 
 .form input {
@@ -27,6 +28,7 @@ body {
   border: none;
   color: white;
   padding: 15px 32px;
+  margin-top: 26px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -34,6 +36,8 @@ body {
   cursor: pointer;
   border-radius: 6px;
   transition: background-color 0.3s, color 0.3s;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
 }
 
 .startButton:hover {
@@ -59,4 +63,9 @@ body {
 .searchRepoButton:hover {
   background-color: rgb(7, 22, 34);
   color: #fff;
+}
+
+.loading {
+  margin-top: 200px;
+  font-size: x-large;
 }

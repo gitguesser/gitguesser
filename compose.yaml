@@ -14,8 +14,6 @@ services:
     build: ./backend
     working_dir: /backend/backend
     env_file: .env
-    environment:
-      - FRONTEND_URL=http://${BASE_IP:-localhost}:3000
     command: bash -c 'while !</dev/tcp/db/${POSTGRES_PORT:?}; do sleep 1; done; uvicorn app.main:app --host 0.0.0.0 --reload'
     volumes:
       - .:/backend

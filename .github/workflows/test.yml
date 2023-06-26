@@ -13,12 +13,14 @@ jobs:
       - name: Create .env file
         run: echo "${{ vars.ENV_FILE }}" > .env
       - name: Add Github token
-        env: 
+        env:
           SECRET_TOKEN: ${{ secrets.SECRET_API_TOKEN }}
         run: echo "$SECRET_TOKEN" >> .env
       - name: Build and run containers
         run: docker-compose up -d --build
-      - name: Run tests
+      - name: Run backend tests
         run: docker-compose exec -T -w /backend backend pytest
+      - name: Run frontend tests
+        run: docker-compose exec -T -e CI=true -w /frontend frontend npm test
       - name: Stop containers
         run: docker-compose down

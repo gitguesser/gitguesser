@@ -26,22 +26,43 @@ body {
 .reroll-button,
 .select-button,
 .home-button {
-  padding: 8px 12px;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  padding: 9px 14px;
   font-size: 14px;
   border: none;
   border-radius: 4px;
-  background-color: #4caf50;
+  background-color: #429145;
   color: #fff;
   cursor: pointer;
   margin-right: 10px;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .home-button {
   background-color: #ff9800;
 }
 
+.home-button:hover {
+  background-color: #b26b01;
+}
+
 .select-button {
-  background-color: #54aff0;
+  background-color: rgb(33, 116, 184);
+}
+
+.select-button:hover {
+  background-color: rgb(8, 50, 85);
+}
+
+.search-button:hover,
+.reroll-button:hover {
+  background-color: #1e5720;
+}
+
+.search-button:disabled:hover,
+.reroll-button:disabled:hover {
+  background-color: #429145;
 }
 
 .repo-list {
@@ -65,4 +86,9 @@ body {
   color: red;
   font-weight: bold;
   margin-top: 10px;
+}
+
+.loading {
+  margin-top: 100px;
+  font-size: x-large;
 }

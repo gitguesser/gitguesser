@@ -13,8 +13,10 @@ function Home() {
   const [owner, setOwner] = useState(state.repo_owner || "");
   const [branch, setBranch] = useState(state.repo_branch || "main");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e) => {
+    setLoading(true);
     e.preventDefault();
 
     const options = {
@@ -47,6 +49,7 @@ function Home() {
         const message = "Error occurred: " + e.message;
         console.log(message);
         setError(message);
+        setLoading(false);
       });
   };
 
@@ -59,35 +62,42 @@ function Home() {
   return (
     <>
       <h1 className="title">gitguesser</h1>
-      <br />
-      <form className="form" onSubmit={handleSubmit}>
-        {inputs.map(({ label, value, onChange }, index) => (
-          <div key={index}>
-            <div>
-              <label htmlFor={index}>{label}:</label>
-              <br />
-              <input
-                type="text"
-                id={index}
-                value={value}
-                onChange={(e) => onChange(e.target.value)}
-                required
-              />
-            </div>
+      {loading ? (
+        <div className="form loading">Loading...</div>
+      ) : (
+        <>
+          <form className="form" onSubmit={handleSubmit}>
+            {inputs.map(({ label, value, onChange }, index) => (
+              <div key={index}>
+                <div>
+                  <label htmlFor={index}>{label}:</label>
+                  <br />
+                  <input
+                    type="text"
+                    id={index}
+                    value={value}
+                    onChange={(e) => onChange(e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
+            ))}
             <br />
-          </div>
-        ))}
-        <br />
-        <button className="startButton" type="submit">
-          Start game
-        </button>
-        <br />
-        <button className="searchRepoButton" onClick={() => navigate("search")}>
-          Search repositories
-        </button>
-      </form>
-      <br />
-      {error !== null && <div>{error}</div>}
+            <button className="startButton" type="submit">
+              Start game
+            </button>
+            <br />
+            <button
+              className="searchRepoButton"
+              onClick={() => navigate("search")}
+            >
+              Search repositories
+            </button>
+          </form>
+          <br />
+          {error !== null && <div className="form">{error}</div>}
+        </>
+      )}
     </>
   );
 }

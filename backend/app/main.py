@@ -1,4 +1,3 @@
-from app.config import settings
 from app.database import init_models
 from app.routers import game, repository, search
 from fastapi import FastAPI
@@ -9,9 +8,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        settings.frontend_url,
-    ],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

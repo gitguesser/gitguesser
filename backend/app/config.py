@@ -15,7 +15,6 @@ class Settings(BaseSettings):
     postgres_db: str
     github_username: str | None
     github_token: str | None
-    frontend_url: str
 
     class Config:
         case_sensitive = False
