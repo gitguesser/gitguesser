@@ -26,7 +26,7 @@ describe("Game", () => {
     expect(screen.getByText(/Choose/)).toBeInTheDocument();
     expect(screen.getByText(/Back/)).toBeInTheDocument();
     expect(screen.getByText(/Submit/)).toBeInTheDocument();
-    expect(screen.queryByText(/Chosen directory:/)).toBeNull();
+    expect(screen.getByText(/Chosen directory:/)).toBeInTheDocument();
     expect(screen.queryByText(/Answer submitted/)).toBeNull();
     expect(screen.queryByText(/Error occurred/)).toBeNull();
     expect(screen.queryByText(/Loading.../)).toBeNull();
