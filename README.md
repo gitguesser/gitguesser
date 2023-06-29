@@ -5,6 +5,12 @@
 [![Generate docs](https://github.com/gitguesser/gitguesser/actions/workflows/docs.yml/badge.svg)](https://github.com/gitguesser/gitguesser/actions/workflows/docs.yml)
 [![Deploy pages](https://github.com/gitguesser/gitguesser/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/gitguesser/gitguesser/actions/workflows/pages/pages-build-deployment)
 
+[![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://react.dev/)
+[![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://docs.docker.com/)
+[![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)](https://docs.github.com/en/actions)
+
 
 ## Screenshots
 <summary>During game</summary>
