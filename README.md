@@ -11,6 +11,30 @@
 [![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)](https://docs.github.com/en/actions)
 
+
+## Screenshots
+<summary>During game</summary>
+
+![During game Screenshot](https://i.imgur.com/4SmzdSD.png)
+
+<details>
+<summary>Game start</summary>
+
+![Game start Screenshot](https://i.imgur.com/5Cjzl7D.png)
+</details>
+
+<details>
+<summary>Search repositories</summary>
+
+![Search repositories Screenshot](https://i.imgur.com/t1Aq8wW.png)
+</details>
+
+<details>
+<summary>Game results</summary>
+
+![Game results Screenshot](https://i.imgur.com/8TRja4o.png)
+</details>
+
 ## Docs
 The API docs are available [here](https://gitguesser.github.io/gitguesser/).
 
