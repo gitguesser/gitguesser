@@ -7,28 +7,26 @@
 
 
 ## Screenshots
+<summary>During game</summary>
+
+![During game Screenshot](https://i.imgur.com/4SmzdSD.png)
+
 <details>
 <summary>Game start</summary>
 
-![Game start Screenshot](https://i.imgur.com/BXdGw4d.png)
+![Game start Screenshot](https://i.imgur.com/5Cjzl7D.png)
 </details>
 
 <details>
 <summary>Search repositories</summary>
 
-![Search repositories Screenshot](https://i.imgur.com/cin3Yvu.png)
-</details>
-
-<details>
-<summary>During game</summary>
-
-![During game Screenshot](https://i.imgur.com/Tu8C0aA.png)
+![Search repositories Screenshot](https://i.imgur.com/t1Aq8wW.png)
 </details>
 
 <details>
 <summary>Game results</summary>
 
-![Game results Screenshot](https://i.imgur.com/9GMiawi.png)
+![Game results Screenshot](https://i.imgur.com/8TRja4o.png)
 </details>
 
 ## Docs
