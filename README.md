@@ -5,6 +5,32 @@
 [![Generate docs](https://github.com/gitguesser/gitguesser/actions/workflows/docs.yml/badge.svg)](https://github.com/gitguesser/gitguesser/actions/workflows/docs.yml)
 [![Deploy pages](https://github.com/gitguesser/gitguesser/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/gitguesser/gitguesser/actions/workflows/pages/pages-build-deployment)
 
+
+## Screenshots
+<details>
+<summary>Game start</summary>
+
+![Game start Screenshot](https://i.imgur.com/BXdGw4d.png)
+</details>
+
+<details>
+<summary>Search repositories</summary>
+
+![Search repositories Screenshot](https://i.imgur.com/cin3Yvu.png)
+</details>
+
+<details>
+<summary>During game</summary>
+
+![During game Screenshot](https://i.imgur.com/Tu8C0aA.png)
+</details>
+
+<details>
+<summary>Game results</summary>
+
+![Game results Screenshot](https://i.imgur.com/9GMiawi.png)
+</details>
+
 ## Docs
 The API docs are available [here](https://gitguesser.github.io/gitguesser/).
 
